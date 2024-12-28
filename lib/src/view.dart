@@ -189,12 +189,12 @@ class SettingsTab extends StatelessWidget {
                 },
               ),
               SwitchListTile(
-                title: const Text('3 Edges cycles'),
+                title: const Text('3.txt Edges cycles'),
                 value: config.threeEdgeCases,
                 onChanged: (value) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('3 edges cycles are not supported yet, je to v piči'),
+                      content: Text('3.txt edges cycles are not supported yet, je to v piči'),
                     ),
                   );
                   return;
@@ -209,12 +209,6 @@ class SettingsTab extends StatelessWidget {
                 title: const Text('2-2 Cycles'),
                 value: config.twoTwoEdgeCases,
                 onChanged: (value) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('2-2 edges cycles are not supported yet, je to v piči'),
-                    ),
-                  );
-                  return;
                   onConfigChanged(
                     config.copyWith(
                       twoTwoEdgeCases: !config.twoTwoEdgeCases,
