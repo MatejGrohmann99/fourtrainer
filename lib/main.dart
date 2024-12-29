@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'src/view.dart';
+import 'package:fourtrainer/src/presentation/trainer_grid.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,7 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: ContentView(),
+      body: TrainerGrid(),
     );
   }
 }
