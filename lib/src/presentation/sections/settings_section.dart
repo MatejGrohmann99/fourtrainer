@@ -18,7 +18,7 @@ class SettingsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       width: 250,
       height: double.infinity,
       child: IgnorePointer(

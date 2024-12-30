@@ -1631,7 +1631,6 @@ class Case {
         "Rw U' Rw' U' Rw U' Rw' U' Rw U' Rw' U' F' U' F L F2 L' R F' U2 R2 B' R2 B U R' F' ",
         "Rw U' Rw' U' Rw U' Rw' U' Rw U' Rw' U' F' U' F L F2 L' U' D R U D' F U' F' D R D' ",
         "Rw U Rw' U Rw U Rw' U Rw U Rw' F' U' F L F2 L' U' R' F R F R' F2 R U F2 ",
-
       ],
     ),
   ];

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class ScrambleSection extends StatelessWidget {
@@ -15,12 +13,15 @@ class ScrambleSection extends StatelessWidget {
       height: 100,
       child: Card(
         child: Center(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              scramble ?? 'Select something to mašinka on',
-              style: Theme.of(context).textTheme.displayMedium,
-              textAlign: TextAlign.center,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                scramble ?? 'Select something to mašinka on',
+                style: Theme.of(context).textTheme.displayMedium,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         ),

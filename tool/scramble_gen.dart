@@ -13,8 +13,9 @@ void main() async {
   final random = Random();
 
   for (var i = 0; i < algCount; i++) {
-    final setup = random.nextBool() ? "Rw U' Rw' U' Rw U' Rw' U' Rw U' Rw' U' F' U' F " : "Rw U Rw' U Rw U Rw' U Rw U Rw' F' U' F ";
-
+    final setup = random.nextBool()
+        ? "Rw U' Rw' U' Rw U' Rw' U' Rw U' Rw' U' F' U' F "
+        : "Rw U Rw' U Rw U Rw' U Rw U Rw' F' U' F ";
 
     final f2U2Setup = "L F L' " + f2U2Cases[random.nextInt(f2U2Cases.length)] + " ";
     final f2U2flipSetup = "L F2 L' " + f2U2flipCases[random.nextInt(f2U2flipCases.length)] + " ";

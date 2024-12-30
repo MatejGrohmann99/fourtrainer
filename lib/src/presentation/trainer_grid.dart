@@ -44,9 +44,12 @@ class _TrainerGridState extends State<TrainerGrid> {
                 child: Row(
                   children: [
                     StatisticsSection(
-                      session: state.session ?? [],
-                      onDelete: controller.onDeleteSessionHandler,
+                      sessions: state.sessions,
+                      index: state.selectedSessionIndex,
+                      onDelete: controller.onDeleteSessionTimesHandler,
                       onEdit: controller.onEditSessionTimeHandler,
+                      onSessionChangedRequested: controller.onSessionChangedRequestedHandler,
+                      isTimerRunning: state.isTimerRunning,
                     ),
                     Expanded(
                       child: TimerSection(
@@ -57,7 +60,7 @@ class _TrainerGridState extends State<TrainerGrid> {
                     SettingsSection(
                       isRunning: state.isTimerRunning,
                       onConfigChanged: controller.onConfigChangedHandler,
-                      config: state.config,
+                      config: state.sessions[state.selectedSessionIndex].config,
                     ),
                   ],
                 ),

@@ -39,18 +39,7 @@ class SessionTime {
     if (hasDNF) {
       return 'DNF';
     }
-
-    final seconds = duration.inSeconds + (hasPenalty ? 2 : 0);
-    final secondsRemaining = seconds % 60;
-    final secondsFormatted = secondsRemaining > 9 ? secondsRemaining : '0$secondsRemaining';
-    final millisecondsRemaining = duration.inMilliseconds % 1000;
-    final millisecondsFormatted = millisecondsRemaining > 99 ? millisecondsRemaining : '0$millisecondsRemaining';
-
-    if (seconds < 60) {
-      return '$secondsFormatted.$millisecondsFormatted${hasPenalty ? '+' : ''}';
-    } else {
-      return '${duration.inMinutes}:$secondsFormatted.$millisecondsFormatted${hasPenalty ? '+' : ''}';
-    }
+    return duration.prettyString(hasPenalty: hasPenalty);
   }
 
   Map<String, dynamic> toJsonMap() {
@@ -83,5 +72,21 @@ class SessionTime {
       hasPenalty: sessionObject['hasPenalty'] as bool? ?? false,
       hasDNF: sessionObject['hasDNF'] as bool? ?? false,
     );
+  }
+}
+
+extension Formatter on Duration {
+  String prettyString({bool hasPenalty = false}) {
+    final seconds = inSeconds + (hasPenalty ? 2 : 0);
+    final secondsRemaining = seconds % 60;
+    final secondsFormatted = secondsRemaining > 9 ? secondsRemaining : '0$secondsRemaining';
+    final millisecondsRemaining = inMilliseconds % 1000;
+    final millisecondsFormatted = millisecondsRemaining > 99 ? millisecondsRemaining : '0$millisecondsRemaining';
+
+    if (seconds < 60) {
+      return '$secondsFormatted.$millisecondsFormatted${hasPenalty ? '+' : ''}';
+    } else {
+      return '$inMinutes:$secondsFormatted.$millisecondsFormatted${hasPenalty ? '+' : ''}';
+    }
   }
 }

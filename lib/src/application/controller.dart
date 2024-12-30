@@ -8,6 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../cases.dart';
 import '../domain/app_state.dart';
+import '../domain/session.dart';
 import '../domain/session_time.dart';
 import '../domain/settings_config.dart';
 
@@ -27,8 +28,18 @@ class AppController {
     );
   }
 
-  ValueNotifier<AppState> state = ValueNotifier(
-    kDebugMode ? AppState.fake() : const AppState(),
+  final ValueNotifier<AppState> state = ValueNotifier(
+    const AppState(
+      selectedSessionIndex: 0,
+      sessions: [
+        Session(
+          id: '1',
+          name: 'Default',
+          times: [],
+          config: SettingsConfig(),
+        ),
+      ],
+    ),
   );
 
   final storage = const FlutterSecureStorage();
@@ -49,6 +60,7 @@ class AppController {
         if (state.isTimerRunning) {
           final now = DateTime.now();
           final difference = now.difference(state.timerStartTime!);
+          final session = state.sessions[state.selectedSessionIndex];
 
           final time = SessionTime(
             duration: difference,
@@ -56,14 +68,14 @@ class AppController {
             scramble: state.scramble,
           );
 
-          final scramble = generateScramble(state.config);
+          final scramble = generateScramble(session.config);
+          final updatedSessionTimeList = List<SessionTime>.from(session.times)..add(time);
+          final updatedSession = session.copyWith(times: updatedSessionTimeList);
+          final updatedSessionList = List<Session>.from(state.sessions)..[state.selectedSessionIndex] = updatedSession;
 
           updateState(
             state.copyWith(
-              session: [
-                ...state.session ?? [],
-                time,
-              ],
+              sessions: updatedSessionList,
               timerStartTime: () => null,
               lastTime: time,
               scramble: scramble,
@@ -80,10 +92,14 @@ class AppController {
     }
   }
 
-  void onDeleteSessionHandler() {
+  void onDeleteSessionTimesHandler(int index) {
+    final oldSessionsCopy = List<Session>.from(state.value.sessions);
+    final newSession = oldSessionsCopy[state.value.selectedSessionIndex].copyWith(times: []);
+    final newSessionsList = oldSessionsCopy..[state.value.selectedSessionIndex] = newSession;
+
     updateState(
       state.value.copyWith(
-        session: [],
+        sessions: newSessionsList,
       ),
     );
   }
@@ -117,28 +133,38 @@ class AppController {
   }
 
   void onEditSessionTimeHandler((SessionTime, bool) value) {
-    final item = state.value.session!.firstWhere((e) => e.when == value.$1.when);
-    final timeIndex = state.value.session!.indexOf(item);
+    final session = state.value.sessions[state.value.selectedSessionIndex];
+
+    final item = session.times.firstWhere((e) => e.when == value.$1.when);
+    final timeIndex = session.times.indexOf(item);
     final shouldDelete = value.$2;
 
     if (shouldDelete) {
-      final newSession = List<SessionTime>.from(state.value.session!);
+      final newSession = List<SessionTime>.from(session.times);
       newSession.removeAt(timeIndex);
+
+      final oldSessionsCopy = List<Session>.from(state.value.sessions);
+      final newSessionsList = oldSessionsCopy..[state.value.selectedSessionIndex] = session.copyWith(times: newSession);
 
       updateState(
         state.value.copyWith(
-          session: newSession,
+          sessions: newSessionsList,
         ),
       );
     } else {
-      final newSession = List<SessionTime>.from(state.value.session!);
+      final newSession = List<SessionTime>.from(session.times);
       newSession[timeIndex] = value.$1;
+
+      final oldSessionsCopy = List<Session>.from(state.value.sessions);
+      final newSessionsList = oldSessionsCopy..[state.value.selectedSessionIndex] = session.copyWith(times: newSession);
 
       updateState(
         state.value.copyWith(
-          session: newSession,
+          sessions: newSessionsList,
         ),
       );
     }
   }
+
+  void onSessionChangedRequestedHandler(int sessionIndex) {}
 }
