@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:fourtrainer/src/domain/session_time.dart';
+import 'package:fourtrainer/src/domain/settings_config.dart';
+
 class AppState {
   const AppState({
     this.message,
@@ -62,59 +65,40 @@ class AppState {
       lastTime: lastTime ?? this.lastTime,
     );
   }
-}
 
-class SessionTime {
-  SessionTime({
-    required this.duration,
-    required this.when,
-    this.message,
-    this.scramble,
-  });
-
-  final Duration duration;
-  final DateTime when;
-  final String? message;
-  final String? scramble;
-
-  @override
-  String toString() {
-    final seconds = duration.inSeconds;
-    final secondsRemaining = seconds % 60;
-    final secondsFormatted = secondsRemaining > 9 ? secondsRemaining : '0$secondsRemaining';
-    final millisecondsRemaining = duration.inMilliseconds % 1000;
-    final millisecondsFormatted = millisecondsRemaining > 99 ? millisecondsRemaining : '0$millisecondsRemaining';
-
-    if (seconds < 60) {
-      return '$secondsFormatted.$millisecondsFormatted';
-    } else {
-      return '${duration.inMinutes}:$secondsFormatted.$millisecondsFormatted';
-    }
+  Map<String, dynamic> toJsonMap() {
+    return {
+      'appState': {
+        'message': message,
+        'timerStartTime': timerStartTime?.toIso8601String(),
+        'session': session?.map((e) => e.toJsonMap()).toList(),
+        'settingsConfig': config.toJsonMap(),
+        'scramble': scramble,
+        'lastTime': lastTime?.toJsonMap(),
+      },
+    };
   }
-}
 
-class SettingsConfig {
-  const SettingsConfig({
-    this.twoEdgeCases = false,
-    this.threeEdgeCases = false,
-    this.twoTwoEdgeCases = false,
-  });
+  static AppState? fromJsonMap(Map<String, dynamic> jsonMap) {
+    final appStateObject = jsonMap['appState'] as Map<String, dynamic>?;
+    if (appStateObject == null) {
+      return null;
+    }
 
-  bool get any => twoEdgeCases || threeEdgeCases || twoTwoEdgeCases;
-
-  final bool twoEdgeCases;
-  final bool threeEdgeCases;
-  final bool twoTwoEdgeCases;
-
-  SettingsConfig copyWith({
-    bool? twoEdgeCases,
-    bool? threeEdgeCases,
-    bool? twoTwoEdgeCases,
-  }) {
-    return SettingsConfig(
-      twoEdgeCases: twoEdgeCases ?? this.twoEdgeCases,
-      threeEdgeCases: threeEdgeCases ?? this.threeEdgeCases,
-      twoTwoEdgeCases: twoTwoEdgeCases ?? this.twoTwoEdgeCases,
+    return AppState(
+      message: appStateObject['message'] as String?,
+      timerStartTime: appStateObject['timerStartTime'] == null
+          ? null
+          : DateTime.tryParse(appStateObject['timerStartTime'] as String? ?? ''),
+      session: (appStateObject['session'] as List<dynamic>?)
+              ?.map((e) => SessionTime.fromJsonMap(e as Map<String, dynamic>?))
+              .toList()
+              .nonNulls
+              .toList() ??
+          [],
+      config: SettingsConfig.fromJsonMap(appStateObject['settingsConfig'] as Map<String, dynamic>?)!,
+      scramble: appStateObject['scramble'] as String?,
+      lastTime: SessionTime.fromJsonMap(appStateObject['lastTime'] as Map<String, dynamic>?),
     );
   }
 }

@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 
-import '../../state.dart';
+import '../../domain/settings_config.dart';
 
 class SettingsSection extends StatelessWidget {
   const SettingsSection({
@@ -47,12 +46,11 @@ class SettingsSection extends StatelessWidget {
                 title: const Text('3 Edges cycles'),
                 value: config.threeEdgeCases,
                 onChanged: (value) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('3.txt edges cycles are not supported yet, je to v piči'),
+                  onConfigChanged(
+                    config.copyWith(
+                      threeEdgeCases: !config.threeEdgeCases,
                     ),
                   );
-                  return;
                 },
               ),
               SwitchListTile(
@@ -62,6 +60,17 @@ class SettingsSection extends StatelessWidget {
                   onConfigChanged(
                     config.copyWith(
                       twoTwoEdgeCases: !config.twoTwoEdgeCases,
+                    ),
+                  );
+                },
+              ),
+              SwitchListTile(
+                title: const Text('4 Edge Cycles'),
+                value: config.fourEdgeCases,
+                onChanged: (value) {
+                  onConfigChanged(
+                    config.copyWith(
+                      fourEdgeCases: !config.fourEdgeCases,
                     ),
                   );
                 },

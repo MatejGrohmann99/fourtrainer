@@ -4,7 +4,7 @@ import 'package:fourtrainer/src/presentation/sections/settings_section.dart';
 import 'package:fourtrainer/src/presentation/sections/statistics_section.dart';
 import 'package:fourtrainer/src/presentation/sections/timer_section.dart';
 
-import '../controller.dart';
+import '../application/controller.dart';
 
 class TrainerGrid extends StatefulWidget {
   const TrainerGrid({
@@ -16,7 +16,7 @@ class TrainerGrid extends StatefulWidget {
 }
 
 class _TrainerGridState extends State<TrainerGrid> {
-  final controller = Controller();
+  final controller = AppController();
   final focusNode = FocusNode();
 
   @override
@@ -46,6 +46,7 @@ class _TrainerGridState extends State<TrainerGrid> {
                     StatisticsSection(
                       session: state.session ?? [],
                       onDelete: controller.onDeleteSessionHandler,
+                      onEdit: controller.onEditSessionTimeHandler,
                     ),
                     Expanded(
                       child: TimerSection(

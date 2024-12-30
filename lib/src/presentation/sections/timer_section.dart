@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../state.dart';
+import '../../domain/session_time.dart';
 
 class TimerSection extends StatefulWidget {
   const TimerSection({required this.lastTime, required this.isTimerRunning, super.key});
