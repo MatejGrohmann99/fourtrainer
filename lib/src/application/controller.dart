@@ -1,19 +1,18 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fourtrainer/src/application/scramble_handler.dart';
 
-import '../cases.dart';
 import '../domain/app_state.dart';
 import '../domain/session.dart';
 import '../domain/session_time.dart';
 import '../domain/settings_config.dart';
 
 class AppController {
-  final random = Random();
+  final scrambleHandler = ScrambleHandler();
 
   AppController() {
     storage.read(key: 'appState').then(
@@ -21,7 +20,8 @@ class AppController {
         if (value != null) {
           final appState = AppState.fromJsonMap(jsonDecode(value));
           if (appState != null) {
-            state.value = appState;
+            final scramble = scrambleHandler.generateScramble(appState.sessions[appState.selectedSessionIndex].config);
+            state.value = appState.copyWith(scramble: () => scramble?.$1, currentCase: scramble?.$2);
           }
         }
       },
@@ -29,14 +29,14 @@ class AppController {
   }
 
   final ValueNotifier<AppState> state = ValueNotifier(
-    const AppState(
+    AppState(
       selectedSessionIndex: 0,
       sessions: [
         Session(
           id: '1',
           name: 'Default',
           times: [],
-          config: SettingsConfig(),
+          config: SettingsConfig.initial(),
         ),
       ],
     ),
@@ -49,7 +49,7 @@ class AppController {
     state.value = newState;
   }
 
-  void onKeyEventHandler(KeyEvent value) {
+  Future<void> onKeyEventHandler(KeyEvent value) async {
     final state = this.state.value;
 
     if (value is! KeyUpEvent) {
@@ -66,19 +66,28 @@ class AppController {
             duration: difference,
             when: now,
             scramble: state.scramble,
+            caseUsed: state.currentCase,
           );
 
-          final scramble = generateScramble(session.config);
           final updatedSessionTimeList = List<SessionTime>.from(session.times)..add(time);
           final updatedSession = session.copyWith(times: updatedSessionTimeList);
+
           final updatedSessionList = List<Session>.from(state.sessions)..[state.selectedSessionIndex] = updatedSession;
+
+          if (session.config.repeatEachCaseOnce) {
+            updatedSession.config.casesSelected.remove(state.currentCase);
+          }
+
+          final scramble = scrambleHandler.generateScramble(updatedSession.config);
 
           updateState(
             state.copyWith(
               sessions: updatedSessionList,
               timerStartTime: () => null,
               lastTime: time,
-              scramble: scramble,
+              scramble: () => scramble?.$1,
+              lastCase: state.currentCase,
+              currentCase: scramble?.$2,
             ),
           );
         } else {
@@ -102,34 +111,6 @@ class AppController {
         sessions: newSessionsList,
       ),
     );
-  }
-
-  void onConfigChangedHandler(SettingsConfig value) {
-    final scramble = generateScramble(value);
-
-    updateState(
-      state.value.copyWith(
-        settingsConfig: value,
-        scramble: scramble,
-      ),
-    );
-  }
-
-  String? generateScramble(SettingsConfig config) {
-    final cases = [
-      if (config.threeEdgeCases) ...Case.threeCycleCasesList,
-      if (config.twoEdgeCases) ...Case.twoCasesList,
-      if (config.twoTwoEdgeCases) ...Case.twoTwoCasesList,
-      if (config.fourEdgeCases) ...Case.fourEdgeCycles,
-    ];
-    if (cases.isEmpty) return null;
-
-    cases.shuffle(random);
-    final randomCase = cases.elementAt(random.nextInt(cases.length));
-    final randomCaseScrambles = randomCase.scrambles;
-    randomCaseScrambles.shuffle(random);
-
-    return randomCaseScrambles.first;
   }
 
   void onEditSessionTimeHandler((SessionTime, bool) value) {
@@ -167,4 +148,20 @@ class AppController {
   }
 
   void onSessionChangedRequestedHandler(int sessionIndex) {}
+
+  void configUpdateHandler(SettingsConfig config) {
+    final scramble = scrambleHandler.generateScramble(config);
+
+    final oldSessionsCopy = List<Session>.from(state.value.sessions);
+    final newSession = oldSessionsCopy[state.value.selectedSessionIndex].copyWith(config: config);
+    final newSessionsList = oldSessionsCopy..[state.value.selectedSessionIndex] = newSession;
+
+    updateState(
+      state.value.copyWith(
+        sessions: newSessionsList,
+        scramble: () => scramble?.$1,
+        currentCase: scramble?.$2,
+      ),
+    );
+  }
 }

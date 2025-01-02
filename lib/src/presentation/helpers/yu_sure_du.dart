@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-Future<bool> yuSureDu(BuildContext context) async =>
+Future<bool> yuSureDu(BuildContext context, {String? message}) async =>
     await showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: const Text('Yu sure Du?'),
-          content: SizedBox(
-            width: 250,
-            child: Image.asset('images/yu.png'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: 250,
+                child: Image.asset('images/yu.png'),
+              ),
+              if (message case final msg?) Text(msg)
+            ],
           ),
           actions: [
             OutlinedButton(

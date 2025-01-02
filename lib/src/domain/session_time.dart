@@ -1,9 +1,12 @@
+import 'case.dart';
+
 class SessionTime {
   SessionTime({
     required this.duration,
     required this.when,
+    required this.scramble,
+    required this.caseUsed,
     this.message,
-    this.scramble,
     this.hasDNF = false,
     this.hasPenalty = false,
   });
@@ -12,6 +15,7 @@ class SessionTime {
   final DateTime when;
   final String? message;
   final String? scramble;
+  final Case? caseUsed;
 
   final bool hasPenalty;
   final bool hasDNF;
@@ -23,6 +27,7 @@ class SessionTime {
     String? scramble,
     bool? hasPenalty,
     bool? hasDNF,
+    Case? caseUsed,
   }) {
     return SessionTime(
       duration: duration ?? this.duration,
@@ -31,6 +36,7 @@ class SessionTime {
       scramble: scramble ?? this.scramble,
       hasPenalty: hasPenalty ?? this.hasPenalty,
       hasDNF: hasDNF ?? this.hasDNF,
+      caseUsed: caseUsed ?? this.caseUsed,
     );
   }
 
@@ -51,6 +57,7 @@ class SessionTime {
         'scramble': scramble,
         'hasPenalty': hasPenalty,
         'hasDNF': hasDNF,
+        'caseUsed': caseUsed?.toJsonString()
       }
     };
   }
@@ -71,6 +78,7 @@ class SessionTime {
       scramble: sessionObject['scramble'] as String?,
       hasPenalty: sessionObject['hasPenalty'] as bool? ?? false,
       hasDNF: sessionObject['hasDNF'] as bool? ?? false,
+      caseUsed: Case.fromJsonString(sessionObject['caseUsed'] as String?),
     );
   }
 }

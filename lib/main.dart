@@ -31,6 +31,12 @@ class MyApp extends StatelessWidget {
         borderRadius: BorderRadius.zero,
       ),
     );
+    final checkboxTheme = themeData.checkboxTheme.copyWith(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+      ),
+      checkColor: MaterialStateProperty.all(Colors.white),
+    );
     final outLinedButton = OutlinedButtonThemeData(
       style: (themeData.outlinedButtonTheme.style ?? const ButtonStyle()).copyWith(
         shape: const WidgetStatePropertyAll(
@@ -58,6 +64,7 @@ class MyApp extends StatelessWidget {
         cardTheme: cardTheme,
         iconButtonTheme: iconButtonTheme,
         outlinedButtonTheme: outLinedButton,
+        checkboxTheme: checkboxTheme,
         dialogTheme: alertDialog,
       ),
       themeMode: ThemeMode.dark,

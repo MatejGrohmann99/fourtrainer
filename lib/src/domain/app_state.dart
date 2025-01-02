@@ -2,6 +2,8 @@ import 'package:fourtrainer/src/domain/session.dart';
 import 'package:fourtrainer/src/domain/session_time.dart';
 import 'package:fourtrainer/src/domain/settings_config.dart';
 
+import 'case.dart';
+
 class AppState {
   const AppState({
     required this.sessions,
@@ -9,6 +11,8 @@ class AppState {
     this.timerStartTime,
     this.scramble,
     this.lastTime,
+    this.currentCase,
+    this.lastCase,
   });
 
   final int selectedSessionIndex;
@@ -16,6 +20,9 @@ class AppState {
   final List<Session> sessions;
 
   final DateTime? timerStartTime;
+
+  final Case? currentCase;
+  final Case? lastCase;
 
   bool get isTimerRunning => timerStartTime != null;
 
@@ -26,16 +33,19 @@ class AppState {
     int? selectedSessionIndex,
     DateTime? Function()? timerStartTime,
     List<Session>? sessions,
-    SettingsConfig? settingsConfig,
-    String? scramble,
+    String? Function()? scramble,
     SessionTime? lastTime,
+    Case? currentCase,
+    Case? lastCase,
   }) {
     return AppState(
       selectedSessionIndex: selectedSessionIndex ?? this.selectedSessionIndex,
       timerStartTime: timerStartTime != null ? timerStartTime() : this.timerStartTime,
       sessions: sessions ?? this.sessions,
-      scramble: scramble ?? this.scramble,
+      scramble: scramble != null ? scramble() : this.scramble,
       lastTime: lastTime ?? this.lastTime,
+      currentCase: currentCase ?? this.currentCase,
+      lastCase: lastCase ?? this.lastCase,
     );
   }
 
@@ -72,7 +82,7 @@ class AppState {
           Session(
             id: '1',
             name: 'Default',
-            config: configOld ?? const SettingsConfig(),
+            config: configOld ?? SettingsConfig.initial(),
             times: sessionOld,
           ),
         ];
@@ -84,7 +94,6 @@ class AppState {
       timerStartTime: appStateObject['timerStartTime'] == null
           ? null
           : DateTime.tryParse(appStateObject['timerStartTime'] as String? ?? ''),
-      scramble: appStateObject['scramble'] as String?,
       lastTime: SessionTime.fromJsonMap(appStateObject['lastTime'] as Map<String, dynamic>?),
       sessions: sessions,
     );

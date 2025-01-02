@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fourtrainer/src/presentation/helpers/four_grid_painter.dart';
 import 'package:fourtrainer/src/presentation/helpers/kara_msg.dart';
 import 'package:fourtrainer/src/presentation/helpers/strip_painter.dart';
 
@@ -46,22 +47,24 @@ class StatisticsSection extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: DropdownButton(
-                      value: session,
-                      focusColor: Colors.transparent,
-                      items: sessions.map(
-                        (e) {
-                          return DropdownMenuItem(
-                            value: e,
-                            child: Text(
-                              e.name,
-                            ),
-                          );
+                    child: IgnorePointer(
+                      child: DropdownButton(
+                        value: session,
+                        focusColor: Colors.transparent,
+                        items: sessions.map(
+                          (e) {
+                            return DropdownMenuItem(
+                              value: e,
+                              child: Text(
+                                e.name,
+                              ),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (Session? value) {
+                          karaMessage(context, 'Not supported yet, zmrde');
                         },
-                      ).toList(),
-                      onChanged: (Session? value) {
-                        karaMessage(context, 'Not supported yet, zmrde');
-                      },
+                      ),
                     ),
                   ),
                   IconButton(
@@ -105,6 +108,12 @@ class StatisticsSection extends StatelessWidget {
                                     if (time.scramble case final scramble?) ...[
                                       const Text('Scramble:'),
                                       Text(scramble),
+                                    ],
+                                    if (time.caseUsed case final caseUsed?) ...[
+                                      Text(caseUsed.displayName, style: Theme.of(context).textTheme.titleMedium),
+                                      GridWidget(
+                                        gridColors: caseUsed.ui,
+                                      ),
                                     ],
                                     const Divider(),
                                     Row(

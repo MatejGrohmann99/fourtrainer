@@ -1,12 +1,12 @@
-class Case {
-  Case({
+class OldCase {
+  OldCase({
     required this.scrambles,
     this.name,
     this.image,
   });
 
   static final twoCasesList = [
-    Case(
+    OldCase(
       name: 'Generic 2Edge case',
       scrambles: [
         "Rw U2 Rw D Rw' U2 Rw D' Rw2' D' B L B' D U' F U R U R' U' F",
@@ -213,7 +213,7 @@ class Case {
     ),
   ];
   static final twoTwoCasesList = [
-    Case(
+    OldCase(
       name: 'Generic two tww',
       scrambles: [
         "L F2 L' F' R' U' F' U R F' U F Rw2 F2 Rw2 U' Rw2 F2 Rw2 L F L' U R U R' U' R' F U' F' U R F",
@@ -620,7 +620,7 @@ class Case {
     ),
   ];
   static final threeCycleCasesList = [
-    Case(
+    OldCase(
       name: 'Universal 3cycle',
       scrambles: [
         "L F2 L' U' F' D R2 U2 R' U2 R D' r U R U' Rw'  L F L' F' D R' U R U R' U' D' F",
@@ -1128,7 +1128,7 @@ class Case {
   ];
 
   static final fourEdgeCycles = [
-    Case(
+    OldCase(
       name: 'Four cycles experimental',
       scrambles: [
         "L F2 L' R' F2 R2 F U2 R' U R F' R' Rw U' Rw' U' Rw U' Rw' U' Rw U' Rw' U' F' U' F L F L' D R' D' F' U' F R U R' F2 ",

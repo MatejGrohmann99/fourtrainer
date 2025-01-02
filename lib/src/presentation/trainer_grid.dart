@@ -39,7 +39,10 @@ class _TrainerGridState extends State<TrainerGrid> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ScrambleSection(scramble: state.scramble),
+              ScrambleSection(
+                config: state.sessions[state.selectedSessionIndex].config,
+                scramble: state.scramble, configUpdateHandler: controller.configUpdateHandler,
+              ),
               Expanded(
                 child: Row(
                   children: [
@@ -58,8 +61,7 @@ class _TrainerGridState extends State<TrainerGrid> {
                       ),
                     ),
                     SettingsSection(
-                      isRunning: state.isTimerRunning,
-                      onConfigChanged: controller.onConfigChangedHandler,
+                      lastCase: state.lastCase,
                       config: state.sessions[state.selectedSessionIndex].config,
                     ),
                   ],
