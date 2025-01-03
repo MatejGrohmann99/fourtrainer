@@ -2,13 +2,13 @@
 import 'package:fourtrainer/main.dart';
 import 'package:fourtrainer/src/application/controller.dart';
 import 'package:fourtrainer/src/application/scramble_handler.dart';
-import 'package:fourtrainer/src/domain/algorithms/no_top_flip_algorithms.g.dart';
+import '../packages/revenge_cube/lib/src/generated/no_top_flip_algorithms.g.dart';
 import 'package:fourtrainer/src/domain/algorithms/three_cycle_setup_algorithms.g.dart';
 import 'package:fourtrainer/src/domain/algorithms/ub_flip_algorithms.g.dart';
 import 'package:fourtrainer/src/domain/algorithms/uf_flip_algorithms.g.dart';
 import 'package:fourtrainer/src/domain/algorithms/uf_ur_ub_flip_algorithms.g.dart';
 import 'package:fourtrainer/src/domain/algorithms/ufub_flip_algorithms.g.dart';
-import 'package:fourtrainer/src/domain/algorithms/ufur_flip_algorithms.g.dart';
+import '../packages/revenge_cube/lib/src/generated/ufur_flip_algorithms.g.dart';
 import 'package:fourtrainer/src/domain/algorithms/ur_flip_algorithms.g.dart';
 import 'package:fourtrainer/src/domain/algorithms/urbu_flip_algorithms.g.dart';
 import 'package:fourtrainer/src/domain/app_state.dart';

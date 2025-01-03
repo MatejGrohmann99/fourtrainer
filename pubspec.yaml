@@ -33,7 +33,11 @@ dependencies:
 
   cube_core:
     path: packages/cube_core
+  revenge_cube:
+    path: packages/revenge_cube
   flutter_secure_storage: ^9.2.2
+  get: ^4.6.6
+  equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:
