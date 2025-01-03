@@ -41,7 +41,8 @@ class _TrainerGridState extends State<TrainerGrid> {
             children: [
               ScrambleSection(
                 config: state.sessions[state.selectedSessionIndex].config,
-                scramble: state.scramble, configUpdateHandler: controller.configUpdateHandler,
+                scramble: state.scramble,
+                configUpdateHandler: controller.configUpdateHandler,
               ),
               Expanded(
                 child: Row(
@@ -63,6 +64,7 @@ class _TrainerGridState extends State<TrainerGrid> {
                     SettingsSection(
                       lastCase: state.lastCase,
                       config: state.sessions[state.selectedSessionIndex].config,
+                      onRepeatCasePressed: controller.onRepeatCasePressedHandler,
                     ),
                   ],
                 ),

@@ -1,7 +1,7 @@
 import 'dart:io';
 
-const filePath = 'cube_explorer/algorithms/four_flip_algorithm.txt';
-const outputPath = 'cube_explorer/outputs/four_flip_output.txt';
+const filePath = 'cube_explorer/algorithms/uf_only_flip_algorithm.txt';
+const outputPath = 'cube_explorer/outputs/uf_only_flip_output.txt';
 
 const minLength = 10;
 const maxLength = 10;

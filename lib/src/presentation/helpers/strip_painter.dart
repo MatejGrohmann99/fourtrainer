@@ -4,7 +4,7 @@ class StripedBorderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color.fromRGBO(82, 56, 46, 1) // Color of the stripe
+      ..color = const Color.fromRGBO(100, 100, 46, 1) // Color of the stripe
       ..strokeWidth = 2 // Thickness of the stripe
       ..style = PaintingStyle.stroke;
 

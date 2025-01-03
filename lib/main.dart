@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.zero,
       ),
+      color: const Color.fromRGBO(82, 56, 46, 1),
       margin: const EdgeInsets.all(0),
     );
     final alertDialog = themeData.dialogTheme.copyWith(

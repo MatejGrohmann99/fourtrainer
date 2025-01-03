@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fourtrainer/src/application/scramble_handler.dart';
+import 'package:fourtrainer/src/domain/case.dart';
 
 import '../domain/app_state.dart';
 import '../domain/session.dart';
@@ -161,6 +162,24 @@ class AppController {
         sessions: newSessionsList,
         scramble: () => scramble?.$1,
         currentCase: scramble?.$2,
+      ),
+    );
+  }
+
+  void onRepeatCasePressedHandler(Case repeatCase) {
+    final oldSessionCopy = List<Session>.from(state.value.sessions);
+    final newSession = oldSessionCopy[state.value.selectedSessionIndex].copyWith(
+      config: oldSessionCopy[state.value.selectedSessionIndex].config.addCases([repeatCase]),
+    );
+    final newSessionsList = oldSessionCopy..[state.value.selectedSessionIndex] = newSession;
+
+    final newScramble = scrambleHandler.generateScramble(newSession.config);
+
+    updateState(
+      state.value.copyWith(
+        sessions: newSessionsList,
+        scramble: () => newScramble?.$1,
+        currentCase: newScramble?.$2,
       ),
     );
   }
