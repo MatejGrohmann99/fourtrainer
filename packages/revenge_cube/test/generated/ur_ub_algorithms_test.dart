@@ -1,20 +1,19 @@
-
-
 import 'package:cube_core/cube_core.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:revenge_cube/src/generated/urbu_flip_algorithms.g.dart';
+import 'package:revenge_cube/src/algorithms/revenge_algorithms.dart';
 
 void main() {
   group(
     'urbuFlipAlgorithms:',
-        () {
+    () {
       test(
         'Every generated algorithm does flips UB UR edges and does not effect UF DF DR DB DL',
-            () {
+        () {
           final failedTests = <String>[];
 
+          final algorithms = RevengeAlgorithms().urUbFlipAlgorithms;
           int lineCount = 2;
-          for (final algorithm in urbuFlipAlgorithms) {
+          for (final algorithm in algorithms) {
             const cubeState = CubeStateEntity();
             final algorithmParsed = AlgService().getAlgorithmFromString(algorithm);
             final endState = MoveService().executeAlgorithm(cubeState, algorithmParsed);
@@ -62,7 +61,7 @@ $e
           if (failedTests.isNotEmpty) {
             failedTests.insert(
               0,
-              'ufurFlipAlgorithms test failed ${failedTests.length} times out of ${urbuFlipAlgorithms.length} tests',
+              'ufurFlipAlgorithms test failed ${failedTests.length} times out of ${algorithms.length} tests',
             );
             throw failedTests.join('\n');
           }

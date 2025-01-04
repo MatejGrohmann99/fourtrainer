@@ -197,6 +197,8 @@ extension CaseImageMapper on RevengeCase {
           (2, 1): S.o,
           (3, 1): S.b,
         };
+      default:
+        return {};
     }
   }
 }

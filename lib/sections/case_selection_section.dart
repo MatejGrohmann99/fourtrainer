@@ -37,7 +37,11 @@ class CaseSelection extends StatelessWidget {
                         },
                       ),
                       const Spacer(),
-                      Text('Case selection', style: isTablet ? Theme.of(context).textTheme.titleLarge : Theme.of(context).textTheme.titleMedium,),
+                      Text(
+                        'Case selection',
+                        style:
+                            isTablet ? Theme.of(context).textTheme.titleLarge : Theme.of(context).textTheme.titleMedium,
+                      ),
                       const Spacer(),
                       if (controller.isChanged) ...[
                         IconButton(
@@ -245,7 +249,6 @@ class CasesOverlayWidget extends StatelessWidget {
                                     style: isTablet
                                         ? Theme.of(context).textTheme.labelMedium
                                         : Theme.of(context).textTheme.labelSmall,
-
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),

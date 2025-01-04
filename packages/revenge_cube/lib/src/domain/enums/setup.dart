@@ -1,18 +1,4 @@
-
-
-import '../../generated/four_cycle_setup_algorithms.g.dart';
-import '../../generated/four_flip_algorithms.g.dart';
-import '../../generated/no_top_flip_algorithms.g.dart';
-import '../../generated/three_cycle_setup_algorithms.g.dart';
-import '../../generated/ub_flip_algorithms.g.dart';
-import '../../generated/uf_flip_algorithms.g.dart';
-import '../../generated/uf_ur_ub_flip_algorithms.g.dart';
-import '../../generated/ufub_flip_algorithms.g.dart';
-import '../../generated/ufur_flip_algorithms.g.dart';
-import '../../generated/ur_flip_algorithms.g.dart';
-import '../../generated/urbu_flip_algorithms.g.dart';
-
-
+import 'package:revenge_cube/src/algorithms/revenge_algorithms.dart';
 
 enum Setup {
   fourCycleSetup,
@@ -27,34 +13,58 @@ enum Setup {
   noFlipSetup,
   fourFlipSetup,
   fiveMoveTrigger,
+  fInverseSexiSetup,
+  rUFUSetup,
+  ulurSetup,
+  rotationFsexiSetup,
+  ufurulSetup,
+  ufulSetup,
+  ufulTwistSetup,
+  urubswapulflipSetup,
   ;
 
   List<String> getAlgorithms() {
     switch (this) {
       case Setup.fourCycleSetup:
-        return fourCycleSetupAlgorithms;
+        return RevengeAlgorithms().fourCycleSetupAlgorithms;
       case Setup.threeCycleSetup:
-        return threeCycleSetupAlgorithms;
+        return RevengeAlgorithms().threeCycleSetupAlgorithms;
       case Setup.ufurubFlipSetup:
-        return ufurubFlipAlgorithms;
+        return RevengeAlgorithms().fourFlipAlgorithms;
       case Setup.ufurFlipSetup:
-        return ufurFlipAlgorithms;
+        return RevengeAlgorithms().ufUrFlipAlgorithms;
       case Setup.ufubFlipSetup:
-        return ufubFlipAlgorithms;
+        return RevengeAlgorithms().ufUbFlipAlgorithms;
       case Setup.urubFlipSetup:
-        return urbuFlipAlgorithms;
+        return RevengeAlgorithms().urUbFlipAlgorithms;
       case Setup.ufFlipSetup:
-        return ufFlipAlgorithms;
+        return RevengeAlgorithms().ufFlipAlgorithms;
       case Setup.urFlipSetup:
-        return urFlipAlgorithms;
+        return RevengeAlgorithms().urFlipAlgorithms;
       case Setup.ubFlipSetup:
-        return ubFlipAlgorithms;
+        return RevengeAlgorithms().ubFlipAlgorithms;
       case Setup.noFlipSetup:
-        return noTopFlipAlgorithm;
+        return RevengeAlgorithms().frFlipNoFlipAlgorithms;
       case Setup.fourFlipSetup:
-        return fourFlipAlgorithms;
+        return RevengeAlgorithms().fourFlipAlgorithms;
       case Setup.fiveMoveTrigger:
         return ["r U R U' Rw'"];
+      case Setup.fInverseSexiSetup:
+        return RevengeAlgorithms().fInverseSexiAlgorithms;
+      case Setup.rUFUSetup:
+        return RevengeAlgorithms().rufuAlgorithms;
+      case Setup.ulurSetup:
+        return RevengeAlgorithms().urUlFlipAlgorithms;
+      case Setup.rotationFsexiSetup:
+        return RevengeAlgorithms().lufuAlgorithms;
+      case Setup.ufurulSetup:
+        return RevengeAlgorithms().ufUrUlFlipAlgorithms;
+      case Setup.ufulSetup:
+        return RevengeAlgorithms().ufUlFlipAlgorithms;
+      case Setup.ufulTwistSetup:
+        return RevengeAlgorithms().ufultwistAlgorithms;
+      case Setup.urubswapulflipSetup:
+        return RevengeAlgorithms().urubulflipAlgorithms;
     }
   }
 }

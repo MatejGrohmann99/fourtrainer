@@ -1,6 +1,6 @@
 import 'package:cube_core/cube_core.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:revenge_cube/src/generated/uf_flip_algorithms.g.dart';
+import 'package:revenge_cube/src/algorithms/revenge_algorithms.dart';
 
 void main() {
   group(
@@ -11,8 +11,10 @@ void main() {
         () {
           final failedTests = <String>[];
 
+          final algorithms = RevengeAlgorithms().ufFlipAlgorithms;
+
           int lineCount = 2;
-          for (final algorithm in ufFlipAlgorithms) {
+          for (final algorithm in algorithms) {
             const cubeState = CubeStateEntity();
             final algorithmParsed = AlgService().getAlgorithmFromString(algorithm);
             final endState = MoveService().executeAlgorithm(cubeState, algorithmParsed);
@@ -56,7 +58,7 @@ $e
           if (failedTests.isNotEmpty) {
             failedTests.insert(
               0,
-              'ufFlipAlgorithms test failed ${failedTests.length} times out of ${ufFlipAlgorithms.length} tests',
+              'ufFlipAlgorithms test failed ${failedTests.length} times out of ${algorithms.length} tests',
             );
             throw failedTests.join('\n');
           }

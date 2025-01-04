@@ -42,45 +42,53 @@ class DialogHandler {
       ) ??
       false;
 
-  void optionDialog(BuildContext context, {required String title, required String content, required VoidCallback onConfirm, required VoidCallback onCancel,}) {
-
+  void optionDialog(
+    BuildContext context, {
+    required String title,
+    required String content,
+    required VoidCallback onConfirm,
+    required VoidCallback onCancel,
+  }) {
     showDialog<bool>(
         context: context,
         builder: (context) {
-      return AlertDialog(
-        title:  Text(title),
-        content: SizedBox(
-          width: 300,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: 50,
-                child: Image.asset('images/kara.png'),
+          return AlertDialog(
+            title: Text(title),
+            content: SizedBox(
+              width: 300,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 50,
+                    child: Image.asset('images/kara.png'),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                      child: Text(
+                    content,
+                    maxLines: 4,
+                  ))
+                ],
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                      child: Text(content, maxLines: 4,))
+            ),
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  onConfirm();
+                  Navigator.of(context).pop(true);
+                },
+                child: const Text('Oke'),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  onCancel();
+                  Navigator.of(context).pop(false);
+                },
+                child: const Text('NO'),
+              ),
             ],
-          ),
-        ),
-        actions: [
-          OutlinedButton(
-            onPressed: () {
-              onConfirm();
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('Oke'),
-          ),
-          OutlinedButton(
-            onPressed: () {
-              onCancel();
-              Navigator.of(context).pop(false);
-            },
-            child: const Text('NO'),
-          ),
-        ],
-      );
-    });
+          );
+        });
   }
 }

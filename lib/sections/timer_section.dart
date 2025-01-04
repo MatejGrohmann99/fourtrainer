@@ -33,7 +33,8 @@ class TimerSection extends StatelessWidget {
                     final displayText = controller.timer?.isActive ?? false
                         ? controller.count.toStringAsFixed(2)
                         : controller.lastTime.toString();
-                    final turtleProgress = (controller.count < 5 ? 0 : (sin(controller.count) * 20 + 20).round()).toInt();
+                    final turtleProgress =
+                        (controller.count < 5 ? 0 : (sin(controller.count) * 20 + 20).round()).toInt();
                     final turtleStart = List.filled(40 - turtleProgress, ' ').join();
                     final turtleEnd = List.filled(turtleProgress, ' ').join();
                     final secondaryWidget = controller.timer?.isActive ?? false
@@ -67,27 +68,28 @@ class TimerSection extends StatelessWidget {
                 ),
               ),
             ),
-        if (isProbablyMobile) Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: 100,
-              width: 300,
-              child: OutlinedButton(
-              onPressed: () {
-              controller.onKeyEventHandler(
-              const KeyUpEvent(
-              logicalKey: LogicalKeyboardKey.space,
-              physicalKey: PhysicalKeyboardKey.space,
-              timeStamp: Duration(seconds: 2),
+            if (isProbablyMobile)
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: 100,
+                    width: 300,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        controller.onKeyEventHandler(
+                            const KeyUpEvent(
+                              logicalKey: LogicalKeyboardKey.space,
+                              physicalKey: PhysicalKeyboardKey.space,
+                              timeStamp: Duration(seconds: 2),
+                            ),
+                            context);
+                      },
+                      child: Text(controller.isTimerRunning ? 'Stop' : 'Start'),
+                    ),
+                  ),
+                ),
               ),
-              context);
-              },
-              child: Text(controller.isTimerRunning ? 'Stop' : 'Start'),
-              ),
-            ),
-          ),
-        ),
           ],
         );
       },

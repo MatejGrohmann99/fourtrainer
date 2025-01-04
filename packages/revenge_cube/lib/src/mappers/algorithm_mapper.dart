@@ -16,6 +16,7 @@ extension AlgorithmMapper on RevengeCase {
       /// FOUR CYCLES
       RevengeCase.fourCycleTwoSplitPairsSymmetricRight => "",
       RevengeCase.fourCycleTwoSplitPairsSymmetricLeft => "",
+      _ => "",
     };
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:fourtrainer/domain/session_config.dart';
 import 'package:fourtrainer/domain/session_time.dart';
@@ -23,7 +22,7 @@ class ScrambleSection extends StatelessWidget {
           curve: Curves.easeInOut,
           child: controller.isScrambleVisible
               ? Container(
-                  padding: isTablet? const EdgeInsets.all(36) :  const EdgeInsets.all(8),
+                  padding: isTablet ? const EdgeInsets.all(36) : const EdgeInsets.all(8),
                   width: double.infinity,
                   height: isTablet ? 200 : 120,
                   child: Card(
@@ -134,7 +133,9 @@ class ScrambleController extends GetxController {
       config = config.removeCases([time.scramble!.situation!]);
     }
 
-    updateScrambleConfig(config,);
+    updateScrambleConfig(
+      config,
+    );
 
     if (scramble == null && config.casesSelected.isEmpty && config.repeatEachCaseOnce) {
       DialogHandler().optionDialog(
@@ -163,7 +164,7 @@ class ScrambleController extends GetxController {
       casesSelected: config.casesSelected.toList(),
       randomizeAuf: config.randomizeAuf,
     );
-      ConfigBucket().saveConfigToPersistence(config);
+    ConfigBucket().saveConfigToPersistence(config);
 
     update();
   }

@@ -65,6 +65,90 @@ enum RevengeCase {
     trigger: Setup.fiveMoveTrigger,
     json: 'fourCycleTwoSplitPairsSymmetricLeft',
   ),
+  fourCycleSymmetricSmallPairs(
+    setup: Setup.fInverseSexiSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleSymmetricSmallPairs',
+  ),
+  fourCycleSymmetricBigPairs(
+    setup: Setup.rUFUSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleSymmetricBigPairs',
+  ),
+  fourCycleSymmetricFlippedPairs(
+    setup: Setup.ufurFlipSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleSymmetricFlippedPairs',
+  ),
+  fourCycleDiagonalSmallPairs(
+    setup: Setup.ulurSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleDiagonalSmallPairs',
+  ),
+  fourCycleDiagonalSmallLong(
+    setup: Setup.ufurFlipSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleDiagonalSmallLong',
+  ),
+  fourCycleDiagonalSmallLongFlipped(
+    setup: Setup.rotationFsexiSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleDiagonalSmallLongFlipped',
+  ),
+  fourCycleSmallLeftLine(
+    setup: Setup.urFlipSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleSmallLeftLine',
+  ),
+  fourCycleSmallRightLine(
+    setup: Setup.ufurulSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleSmallRightLine',
+  ),
+  fourCycleBigPairLeftLine(
+    setup: Setup.ufurubFlipSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleBigPairLeftLine',
+  ),
+  fourCycleBigPairRightLine(
+    setup: Setup.ufFlipSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleBigPairRightLine',
+  ),
+  fourCycleAdjacentSmallPairs(
+    setup: Setup.urubswapulflipSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleAdjacentSmallPairs',
+  ),
+  fourCycleAdjacentBigPairs(
+    setup: Setup.ufulTwistSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleAdjacentBigPairs',
+  ),
+  fourCycleHydraulische(
+    setup: Setup.ufulSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleHydraulische',
+  ),
+  fourCycleOppositeBigPairs(
+    setup: Setup.ufubFlipSetup,
+    adjust: Setup.fourCycleSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'fourCycleOppositeBigPairs',
+  ),
   ;
 
   const RevengeCase({
@@ -97,5 +181,19 @@ enum RevengeCase {
   static List<RevengeCase> get topLayer4cycles => [
         fourCycleTwoSplitPairsSymmetricRight,
         fourCycleTwoSplitPairsSymmetricLeft,
+        fourCycleSymmetricSmallPairs,
+        fourCycleSymmetricBigPairs,
+        fourCycleSymmetricFlippedPairs,
+        fourCycleDiagonalSmallPairs,
+        fourCycleDiagonalSmallLong,
+        fourCycleDiagonalSmallLongFlipped,
+        fourCycleSmallLeftLine,
+        fourCycleSmallRightLine,
+        fourCycleBigPairLeftLine,
+        fourCycleBigPairRightLine,
+        fourCycleAdjacentSmallPairs,
+        fourCycleAdjacentBigPairs,
+        fourCycleHydraulische,
+        fourCycleOppositeBigPairs,
       ];
 }

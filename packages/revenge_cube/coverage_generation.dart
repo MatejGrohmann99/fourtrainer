@@ -1,9 +1,11 @@
 import 'dart:io';
 
 void main() async {
-  final outputFile = File('packages${Platform.pathSeparator}revenge_cube${Platform.pathSeparator}test${Platform.pathSeparator}coverage_test.dart');
+  final outputFile = File(
+      'packages${Platform.pathSeparator}revenge_cube${Platform.pathSeparator}test${Platform.pathSeparator}coverage_test.dart');
 
-  final dir = Directory('packages${Platform.pathSeparator}revenge_cube${Platform.pathSeparator}lib${Platform.pathSeparator}');
+  final dir =
+      Directory('packages${Platform.pathSeparator}revenge_cube${Platform.pathSeparator}lib${Platform.pathSeparator}');
   final files = dir.listSync(recursive: true, followLinks: false).whereType<File>().map((e) {
     return "import 'package:revenge_cube/${e.path.replaceAll(r'\', '/').replaceAll('packages/revenge_cube/lib/', '')}';";
   }).toList();

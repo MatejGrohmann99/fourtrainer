@@ -23,6 +23,8 @@ extension CaseDescriptionMapper on RevengeCase {
         return '4-Cycle / Two Split Pairs Symmetric Right';
       case RevengeCase.fourCycleTwoSplitPairsSymmetricLeft:
         return '4-Cycle / Two Split Pairs Symmetric Left';
+      default:
+        return name;
     }
   }
 }

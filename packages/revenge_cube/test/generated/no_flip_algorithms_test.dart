@@ -1,6 +1,6 @@
 import 'package:cube_core/cube_core.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:revenge_cube/src/generated/no_top_flip_algorithms.g.dart';
+import 'package:revenge_cube/src/algorithms/revenge_algorithms.dart';
 
 void main() {
   group(
@@ -11,8 +11,9 @@ void main() {
         () {
           final failedTests = <String>[];
 
+          final algorithms = RevengeAlgorithms().frFlipNoFlipAlgorithms;
           int lineCount = 2;
-          for (final algorithm in noTopFlipAlgorithm) {
+          for (final algorithm in algorithms) {
             const cubeState = CubeStateEntity();
             final algorithmParsed = AlgService().getAlgorithmFromString(algorithm);
             final endState = MoveService().executeAlgorithm(cubeState, algorithmParsed);
@@ -26,7 +27,6 @@ void main() {
               expect(cubeState.state[2][0][1], endState.state[2][0][1]);
               expect(cubeState.state[3][0][1], endState.state[3][0][1]);
               expect(cubeState.state[4][0][1], endState.state[4][0][1]);
-
 
               // Verify bottom cross edges wont move
               expect(cubeState.state[5][0][1], endState.state[5][0][1]);
@@ -51,7 +51,7 @@ $e
           if (failedTests.isNotEmpty) {
             failedTests.insert(
               0,
-              'noTopFlipAlgorithm test failed ${failedTests.length} times out of ${noTopFlipAlgorithm.length} tests',
+              'noTopFlipAlgorithm test failed ${failedTests.length} times out of ${algorithms.length} tests',
             );
             throw failedTests.join('\n');
           }
