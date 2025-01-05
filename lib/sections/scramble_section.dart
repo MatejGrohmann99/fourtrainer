@@ -4,7 +4,7 @@ import 'package:fourtrainer/domain/session_time.dart';
 import 'package:get/get.dart';
 import 'package:revenge_cube/revenge_cube.dart';
 
-import '../services/config_bucket.dart';
+import '../storage/config_bucket.dart';
 import '../util/dialog.dart';
 import 'case_selection_section.dart';
 
@@ -54,6 +54,11 @@ class ScrambleSection extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              IconButton(
+                                iconSize: 32,
+                                icon: const Icon(Icons.refresh),
+                                onPressed: controller.onRefreshScramble,
+                              ),
                               const SizedBox(
                                 width: 5,
                               ),
@@ -77,7 +82,7 @@ class ScrambleController extends GetxController {
 
   bool isScrambleVisible = false;
 
-  SessionConfig config = ConfigBucket().getInitialConfig();
+  SessionConfig config = ConfigBucket().config;
 
   SessionConfig? configOrigin;
 
@@ -90,19 +95,24 @@ class ScrambleController extends GetxController {
 
   @override
   void onReady() {
-    ConfigBucket().getConfigFromPersistence().then(
-      (value) {
-        if (value != null) {
-          config = value;
-          scramble = _scrambler.generateScramble(
-            casesSelected: config.casesSelected.toList(),
-            randomizeAuf: config.randomizeAuf,
-          );
-          isScrambleVisible = scramble != null;
-          update();
-        }
-      },
+    ConfigBucket().addListener(configListener);
+  }
+
+  @override
+  void onClose() {
+    ConfigBucket().removeListener(configListener);
+    super.onClose();
+  }
+
+  void configListener() {
+    final configFromStorage = ConfigBucket().config;
+    config = configFromStorage;
+    scramble = _scrambler.generateScramble(
+      casesSelected: config.casesSelected.toList(),
+      randomizeAuf: config.randomizeAuf,
     );
+    isScrambleVisible = scramble != null;
+    update();
   }
 
   void toggleScrambleVisibility() {
@@ -129,42 +139,38 @@ class ScrambleController extends GetxController {
       configOrigin = config;
     }
 
-    if (config.repeatEachCaseOnce) {
-      config = config.removeCases([time.scramble!.situation!]);
-    }
-
-    updateScrambleConfig(
-      config,
-    );
-
-    if (scramble == null && config.casesSelected.isEmpty && config.repeatEachCaseOnce) {
+    if (config.repeatEachCaseOnce && config.casesSelected.length != 1) {
+      updateScrambleConfig(
+        config.removeCases([time.scramble!.situation!]),
+      );
+    } else if (config.casesSelected.length == 1 && config.repeatEachCaseOnce) {
       DialogHandler().optionDialog(
         context,
         title: 'All cases repeated',
         content: 'You have done all the cases selected. Do you want to do them again?',
         onConfirm: () {
-          config = configOrigin!;
+          updateScrambleConfig(configOrigin ?? config);
           configOrigin = null;
-          updateScrambleConfig(config);
         },
         onCancel: () {
-          config = config.copyWith(casesSelected: {});
           configOrigin = null;
-          isScrambleVisible = false;
-          ConfigBucket().saveConfigToPersistence(config);
-          update();
+          updateScrambleConfig(config.copyWith(casesSelected: {}));
         },
       );
+    } else {
+      generateNewScramble();
     }
   }
 
   void updateScrambleConfig(SessionConfig config) {
-    this.config = config;
+    ConfigBucket().saveConfigToPersistence(config);
+  }
+
+  void onRefreshScramble() {
     scramble = _scrambler.generateScramble(
       casesSelected: config.casesSelected.toList(),
       randomizeAuf: config.randomizeAuf,
     );
-    ConfigBucket().saveConfigToPersistence(config);
 
     update();
   }

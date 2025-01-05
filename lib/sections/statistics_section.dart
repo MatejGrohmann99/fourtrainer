@@ -5,7 +5,8 @@ import 'package:fourtrainer/util/dialog.dart';
 import 'package:get/get.dart';
 import 'package:revenge_cube/revenge_cube.dart';
 
-import '../services/session_bucket.dart';
+import '../domain/session.dart';
+import '../storage/session_bucket.dart';
 
 class StatisticsSection extends StatelessWidget {
   const StatisticsSection({super.key});
@@ -214,7 +215,7 @@ class TimeDetailDialog extends StatelessWidget {
             if (time.scramble?.situation case final caseUsed?) ...[
               Text(caseUsed.displayName, style: Theme.of(context).textTheme.titleMedium),
               RevengeCubeWidget(
-                gridColors: caseUsed.ui,
+                colors: caseUsed.ui,
               ),
             ],
             const Divider(),
@@ -259,8 +260,7 @@ class TimeDetailDialog extends StatelessWidget {
 class StatisticsController extends GetxController {
   static StatisticsController get to => Get.find();
 
-  var sessionIndex = 0;
-  var session = SessionBucket().getInitialSession();
+  var session = SessionBucket().session;
 
   String get mean {
     final timesWithoutDnf = List.from(session.times)..removeWhere((element) => element.hasDNF);
@@ -278,23 +278,29 @@ class StatisticsController extends GetxController {
 
   @override
   void onReady() {
-    SessionBucket().getSessionFromPersistence(sessionIndex).then(
-      (value) {
-        if (value != null) {
-          session = value;
-          update();
-        }
-      },
-    );
+    SessionBucket().addListener(sessionListener);
     super.onReady();
+  }
+
+  @override
+  void onClose() {
+    SessionBucket().removeListener(sessionListener);
+    super.onClose();
+  }
+
+  void sessionListener() {
+    final session = SessionBucket().session;
+    if (this.session != session) {
+      this.session = session;
+      update();
+    }
   }
 
   void onClearSessionPressed(BuildContext context) {
     DialogHandler().yuSureDu(context, message: 'You will lose your progress').then(
       (value) {
         if (value) {
-          session = session.copyWith(times: []);
-          syncStorage();
+          syncStorage(session.copyWith(times: []));
         }
       },
     );
@@ -315,15 +321,13 @@ class StatisticsController extends GetxController {
   void penaltyToggled(int index) {
     final time = session.times[index];
     final newTime = time.copyWith(hasPenalty: !time.hasPenalty);
-    session = session.updateTimeAt(index, newTime);
-    syncStorage();
+    syncStorage(session.updateTimeAt(index, newTime));
   }
 
   void disqualificationToggled(int index) {
     final time = session.times[index];
     final newTime = time.copyWith(hasDNF: !time.hasDNF);
-    session = session.updateTimeAt(index, newTime);
-    syncStorage();
+    syncStorage(session.updateTimeAt(index, newTime));
   }
 
   void deleteTimeToggled(BuildContext context, int index) {
@@ -331,24 +335,17 @@ class StatisticsController extends GetxController {
     DialogHandler().yuSureDu(context).then(
       (value) {
         if (value) {
-          session = session.removeTimeAt(index);
-          syncStorage();
+          syncStorage(session.removeTimeAt(index));
           pop();
         }
       },
     );
   }
 
-  void onAddTime(SessionTime time) {
-    session = session.addTime(time);
-    syncStorage();
-  }
 
-  void syncStorage() async {
+  void syncStorage(Session session) async {
     await SessionBucket().saveSessionToPersistence(
       session,
-      sessionIndex,
     );
-    update();
   }
 }

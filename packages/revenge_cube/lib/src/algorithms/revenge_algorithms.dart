@@ -42,6 +42,26 @@ part 'raw/revenge_algorithms.ufur_swap_algorithm.dart';
 
 part 'raw/revenge_algorithms.ufultwist_algorithm.dart';
 
+part 'raw/revenge_algorithms.urubufflip_algorithm.dart';
+
+part 'raw/revenge_algorithms.twocycletop_setup.dart';
+
+part 'raw/revenge_algorithms.UBLFswap_algorithm.dart';
+
+part 'raw/revenge_algorithms.leftseximove_algorithm.dart';
+
+part 'raw/revenge_algorithms.rightseximove_algorithm.dart';
+
+part 'raw/revenge_algorithms.UBRFswap_algorithm.dart';
+
+part 'raw/revenge_algorithms.twotwocycle_setup_algorithm.dart';
+
+part 'raw/revenge_algorithms.ufur_twistuf_algorithm.dart';
+
+part "raw/revenge_algorithms.ufur_twistur_algorithm.dart";
+
+part 'raw/revenge_algorithms.sune.dart';
+
 @CubeExplorerAnnotation(
   algorithms: [
     (
@@ -124,6 +144,46 @@ part 'raw/revenge_algorithms.ufultwist_algorithm.dart';
       'ufultwistAlgorithms',
       _ufultwist,
     ),
+    (
+      'threeFlipAlgorithms',
+      _threeflip,
+    ),
+    (
+      'twoCycleTopSetupAlgorithms',
+      _twocycletopraw,
+    ),
+    (
+      'UBLFswapAlgorithms',
+      _ublfswapraw,
+    ),
+    (
+      'leftSexiMoveAlgorithms',
+      _leftseximoveraw,
+    ),
+    (
+      'rightSexiMoveAlgorithms',
+      _rightseximoveraw,
+    ),
+    (
+      'UBRFswapAlgorithms',
+      _ubrfswapraw,
+    ),
+    (
+      'twoTwoCycleSetupAlgorithms',
+      _twotworaw,
+    ),
+    (
+      'UFURswapTwistUF',
+      _ufurtwistufraw,
+    ),
+    (
+      'UFURswapTwistUR',
+      _ufurtwistur,
+    ),
+    (
+      'suneAlgorithms',
+      _sune,
+    ),
   ],
   maxAlgorithmLength: 10,
   maxNumberOfDoubleTurns: 4,
@@ -131,6 +191,7 @@ part 'raw/revenge_algorithms.ufultwist_algorithm.dart';
 )
 class RevengeAlgorithms {
   const RevengeAlgorithms._();
+
   static const RevengeAlgorithms instance = RevengeAlgorithms._();
 
   factory RevengeAlgorithms() => instance;

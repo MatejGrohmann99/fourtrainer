@@ -1,18 +1,21 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:fourtrainer/domain/session_config.dart';
 import 'package:fourtrainer/services/storage_service.dart';
 
-class ConfigBucket {
+class ConfigBucket extends ChangeNotifier {
   static final ConfigBucket _instance = ConfigBucket._();
 
-  ConfigBucket._();
+  ConfigBucket._() {
+    sync();
+  }
 
   factory ConfigBucket() => _instance;
 
   String configStorageKey = 'sessionConfigPersistence';
 
-  SessionConfig getInitialConfig() => SessionConfig.initial();
+  SessionConfig config = SessionConfig.initial();
 
   Future<SessionConfig?> getConfigFromPersistence() async {
     return await StorageService.to.read(configStorageKey).then(
@@ -37,6 +40,18 @@ class ConfigBucket {
       jsonEncode(
         config.toJsonMap(),
       ),
+    );
+    sync();
+  }
+
+  Future<void> sync() async {
+    await getConfigFromPersistence().then(
+          (value) {
+        if (value != null) {
+          config = value;
+          notifyListeners();
+        }
+      },
     );
   }
 }

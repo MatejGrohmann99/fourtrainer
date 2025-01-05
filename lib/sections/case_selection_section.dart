@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fourtrainer/domain/session_config.dart';
 import 'package:fourtrainer/sections/scramble_section.dart';
-import 'package:fourtrainer/services/config_bucket.dart';
+import 'package:fourtrainer/storage/config_bucket.dart';
 import 'package:fourtrainer/util/overlay.dart';
 import 'package:get/get.dart';
 import 'package:revenge_cube/revenge_cube.dart';
@@ -67,15 +67,23 @@ class CaseSelection extends StatelessWidget {
                           children: [
                             CaseTile(
                               index: 0,
-                              link: controller.threeCyclesLayerLink,
-                              cases: RevengeCase.topLayer3cycles,
-                              name: '3-cycles',
+                              link: controller.twoCyclesLayerLink,
+                              cases: RevengeCase.twoCycleCases,
                             ),
                             CaseTile(
                               index: 1,
+                              link: controller.threeCyclesLayerLink,
+                              cases: RevengeCase.topLayer3cycles,
+                            ),
+                            CaseTile(
+                              index: 2,
+                              link: controller.twoTwoCyclesLayerLink,
+                              cases: RevengeCase.twoTwoCycleCases,
+                            ),
+                            CaseTile(
+                              index: 3,
                               link: controller.fourCyclesLayerLink,
                               cases: RevengeCase.topLayer4cycles,
-                              name: '4-cycles',
                             ),
                           ],
                         ),
@@ -117,12 +125,11 @@ class CaseSelection extends StatelessWidget {
 }
 
 class CaseTile extends StatelessWidget {
-  const CaseTile({required this.index, required this.link, required this.cases, required this.name, super.key});
+  const CaseTile({required this.index, required this.link, required this.cases, super.key});
 
   final LayerLink link;
   final int index;
   final List<RevengeCase> cases;
-  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -159,10 +166,10 @@ class CaseTile extends StatelessWidget {
                         RevengeCubeWidget(
                           width: isTablet ? 100 : 50,
                           height: isTablet ? 100 : 50,
-                          gridColors: cases.first.ui,
+                          colors: cases.first.ui,
                         ),
                         Text(
-                          name,
+                          cases.first.categoryName,
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                         const SizedBox(
@@ -241,10 +248,10 @@ class CasesOverlayWidget extends StatelessWidget {
                                   RevengeCubeWidget(
                                     width: isTablet ? 70 : 30,
                                     height: isTablet ? 70 : 30,
-                                    gridColors: caseUsed.ui,
+                                    colors: caseUsed.ui,
                                   ),
                                   Text(
-                                    caseUsed.displayName,
+                                    caseUsed.caseName,
                                     textAlign: TextAlign.center,
                                     style: isTablet
                                         ? Theme.of(context).textTheme.labelMedium
@@ -275,17 +282,22 @@ class CaseController extends GetxController {
 
   @override
   onReady() {
-    ConfigBucket().getConfigFromPersistence().then(
-      (value) {
-        if (value != null) {
-          originalConfig = value;
-          config = value;
-          update();
-        }
-      },
-    );
+    ConfigBucket().addListener(configListener);
   }
 
+  @override
+  onClose() {
+    ConfigBucket().removeListener(configListener);
+  }
+
+  configListener() {
+    final configFromStorage = ConfigBucket().config;
+    config = configFromStorage;
+    originalConfig = configFromStorage;
+  }
+
+  LayerLink twoCyclesLayerLink = LayerLink();
+  LayerLink twoTwoCyclesLayerLink = LayerLink();
   LayerLink threeCyclesLayerLink = LayerLink();
   LayerLink fourCyclesLayerLink = LayerLink();
 
@@ -295,8 +307,8 @@ class CaseController extends GetxController {
 
   bool get isDropdownOpen => dropdownCases.isNotEmpty;
 
-  SessionConfig originalConfig = ConfigBucket().getInitialConfig();
-  SessionConfig config = ConfigBucket().getInitialConfig();
+  SessionConfig originalConfig = ConfigBucket().config;
+  SessionConfig config = ConfigBucket().config;
 
   bool get randomizeAuf => config.randomizeAuf;
 
@@ -327,8 +339,7 @@ class CaseController extends GetxController {
 
   void onSave() {
     originalConfig = config;
-    ScrambleController.to.toggleScrambleVisibility();
-    ScrambleController.to.updateScrambleConfig(config);
+    ConfigBucket().saveConfigToPersistence(config);
   }
 
   void onExit(BuildContext context) {

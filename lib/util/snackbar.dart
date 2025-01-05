@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SnackBarHandler {
-  static SnackBarHandler _instance = SnackBarHandler._internal();
+  static final SnackBarHandler _instance = SnackBarHandler._internal();
 
   SnackBarHandler._internal();
 
@@ -16,14 +16,12 @@ class SnackBarHandler {
         clipBehavior: Clip.antiAlias,
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
-        // Make SnackBar background transparent
         padding: const EdgeInsets.only(bottom: 20),
-        // Remove default padding
         content: Center(
           child: Container(
-            width: 300, // Fixed width
+            width: 300,
             decoration: BoxDecoration(
-              color: Colors.black, // SnackBar background color
+              color: Colors.black,
               borderRadius: BorderRadius.circular(12),
             ),
             padding: const EdgeInsets.all(10),

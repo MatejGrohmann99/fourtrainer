@@ -19,8 +19,6 @@ class Session extends Equatable {
   final List<SessionTime> times;
 
   Session addTime(SessionTime time) {
-    print('add time ${time.scramble?.scramble}');
-    print('add time ${time.scramble?.situation}');
     final newSessionList = List<SessionTime>.from(times)..add(time);
     return copyWith(times: newSessionList);
   }

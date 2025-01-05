@@ -50,6 +50,7 @@ class AppPage extends StatelessWidget {
           const ScrambleSection(),
           Expanded(
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (isLargeTablet) statisticsSection,
                 const Expanded(

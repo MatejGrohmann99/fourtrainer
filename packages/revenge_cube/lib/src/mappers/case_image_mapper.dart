@@ -1,204 +1,197 @@
 import '../domain/enums/revenge_case.dart';
 import '../domain/enums/sticker.dart';
+import '../presentation/revenge_case_image_parser.dart';
 
 extension CaseImageMapper on RevengeCase {
-  Map<(int, int), S> get ui {
+  RevengeCaseImageReference get ui {
     switch (this) {
       case RevengeCase.threeCycleBackGood:
-        return {
-          // TOP EDGE
-          (0, 2): S.b,
-          (0, 3): S.g,
-          (1, 2): S.y,
-          (1, 3): S.o,
-          // BOTTOM EDGE
-          (5, 2): S.y,
-          (5, 3): S.y,
-          (4, 2): S.r,
-          (4, 3): S.b,
-          // SIDE EDGE
-          (2, 5): S.g,
-          (3, 5): S.r,
-          (2, 4): S.o,
-          (3, 4): S.y,
-        };
+        return RevengeCaseImageReference(
+          ub: (S.b, S.g, S.y, S.o),
+          uf: (S.y, S.y, S.r, S.b),
+          ur: (S.g, S.r, S.o, S.y),
+        );
       case RevengeCase.threeCycleFlippedJPerm:
-        return {
-          // TOP EDGE
-          (0, 2): S.o,
-          (0, 3): S.g,
-          (1, 2): S.y,
-          (1, 3): S.y,
-          // BOTTOM EDGE
-          (5, 2): S.r,
-          (5, 3): S.g,
-          (4, 2): S.y,
-          (4, 3): S.y,
-          // SIDE EDGE
-
-          (2, 4): S.o,
-          (3, 4): S.r,
-          (2, 5): S.y,
-          (3, 5): S.y,
-        };
+        return RevengeCaseImageReference(
+          ub: (S.o, S.g, S.y, S.y),
+          uf: (S.r, S.g, S.y, S.y),
+          ur: (S.o, S.r, S.y, S.y),
+        );
       case RevengeCase.threeCycleUperm:
-        return {
-          // TOP EDGE
-          (0, 2): S.g,
-          (0, 3): S.o,
-          (1, 2): S.y,
-          (1, 3): S.y,
-          // BOTTOM EDGE
-          (5, 2): S.g,
-          (5, 3): S.r,
-          (4, 2): S.y,
-          (4, 3): S.y,
-          // SIDE EDGE
+        return RevengeCaseImageReference(
+          ub: (S.g, S.o, S.y, S.y),
+          uf: (S.g, S.r, S.y, S.y),
+          ur: (S.o, S.r, S.y, S.y),
+        );
 
-          (2, 5): S.r,
-          (3, 5): S.o,
-          (2, 4): S.y,
-          (3, 4): S.y,
-        };
       case RevengeCase.threeCycleBackBad:
-        return {
-          // TOP EDGE
-          (0, 2): S.r,
-          (0, 3): S.g,
-          (1, 2): S.y,
-          (1, 3): S.o,
-          // BOTTOM EDGE
-          (5, 2): S.o,
-          (5, 3): S.g,
-          (4, 2): S.g,
-          (4, 3): S.r,
-          // SIDE EDGE
-
-          (2, 4): S.g,
-          (3, 4): S.r,
-          (2, 5): S.r,
-          (3, 5): S.y,
-        };
+        return RevengeCaseImageReference(
+          ub: (S.r, S.g, S.y, S.o),
+          uf: (S.o, S.g, S.g, S.r),
+          ur: (S.g, S.r, S.r, S.y),
+        );
       case RevengeCase.threeCycleJperm:
-        return {
-          // TOP EDGE
-          (0, 2): S.r,
-          (0, 3): S.g,
-          (1, 2): S.y,
-          (1, 3): S.o,
-          // BOTTOM EDGE
-          (5, 2): S.r,
-          (5, 3): S.g,
-          (4, 2): S.g,
-          (4, 3): S.o,
-          // SIDE EDGE
-          (2, 4): S.g,
-          (3, 4): S.y,
-          (2, 5): S.r,
-          (3, 5): S.r,
-        };
+        return RevengeCaseImageReference(
+          ub: (S.r, S.g, S.y, S.o),
+          uf: (S.r, S.g, S.g, S.o),
+          ur: (S.r, S.r, S.g, S.y),
+        );
       case RevengeCase.threeCycleFrontGood:
-        return {
-          // TOP EDGE
-          (0, 2): S.r,
-          (0, 3): S.g,
-          (1, 2): S.y,
-          (1, 3): S.o,
-          // BOTTOM EDGE
-          (5, 2): S.o,
-          (5, 3): S.g,
-          (4, 2): S.g,
-          (4, 3): S.r,
-          // SIDE EDGE
-          (2, 4): S.r,
-          (3, 4): S.r,
-          (2, 5): S.y,
-          (3, 5): S.g,
-        };
+        return RevengeCaseImageReference(
+          ub: (S.r, S.g, S.y, S.o),
+          uf: (S.o, S.g, S.g, S.r),
+          ur: (S.y, S.g, S.r, S.r),
+        );
       case RevengeCase.threeCycleFrontBad:
-        return {
-          // TOP EDGE
-          (0, 2): S.b,
-          (0, 3): S.g,
-          (1, 2): S.y,
-          (1, 3): S.o,
-          // BOTTOM EDGE
-          (5, 2): S.y,
-          (5, 3): S.y,
-          (4, 2): S.r,
-          (4, 3): S.b,
-          // SIDE EDGE
-          (2, 5): S.y,
-          (3, 5): S.o,
-          (2, 4): S.r,
-          (3, 4): S.g,
-        };
+        return RevengeCaseImageReference(
+          ub: (S.b, S.b, S.y, S.o),
+          uf: (S.y, S.y, S.r, S.b),
+          ur: (S.y, S.o, S.r, S.g),
+        );
       case RevengeCase.threeCycleFlippedUPerm:
-        return {
-          // TOP EDGE
-          (0, 2): S.g,
-          (0, 3): S.r,
-          (1, 2): S.o,
-          (1, 3): S.b,
-          // BOTTOM EDGE
-          (5, 2): S.g,
-          (5, 3): S.r,
-          (4, 2): S.o,
-          (4, 3): S.y,
-          // SIDE EDGE
-          (2, 5): S.y,
-          (3, 5): S.b,
-          (2, 4): S.r,
-          (3, 4): S.r,
-        };
+        return RevengeCaseImageReference(
+          ub: (S.g, S.r, S.o, S.b),
+          uf: (S.g, S.r, S.o, S.y),
+          ur: (S.y, S.b, S.r, S.r),
+        );
       case RevengeCase.fourCycleTwoSplitPairsSymmetricRight:
-        return {
-          // TOP EDGE
-          (0, 2): S.y,
-          (0, 3): S.b,
-          (1, 2): S.o,
-          (1, 3): S.r,
-          // BOTTOM EDGE
-          (5, 2): S.b,
-          (5, 3): S.o,
-          (4, 2): S.o,
-          (4, 3): S.y,
-          // SIDE EDGE
-          (2, 5): S.r,
-          (3, 5): S.r,
-          (2, 4): S.y,
-          (3, 4): S.b,
-          // SIDE EDGE LEFTOUS
-          (2, 0): S.o,
-          (3, 0): S.y,
-          (2, 1): S.b,
-          (3, 1): S.r,
-        };
+        return RevengeCaseImageReference(
+          ub: (S.y, S.b, S.o, S.r),
+          uf: (S.b, S.o, S.o, S.y),
+          ur: (S.r, S.r, S.y, S.b),
+          ul: (S.o, S.y, S.b, S.r),
+        );
       case RevengeCase.fourCycleTwoSplitPairsSymmetricLeft:
-        return {
-          // TOP EDGE
-          (0, 2): S.b,
-          (0, 3): S.r,
-          (1, 2): S.o,
-          (1, 3): S.y,
-          // BOTTOM EDGE
-          (5, 2): S.y,
-          (5, 3): S.b,
-          (4, 2): S.r,
-          (4, 3): S.r,
-          // SIDE EDGE
-          (2, 5): S.r,
-          (3, 5): S.o,
-          (2, 4): S.b,
-          (3, 4): S.y,
-          // SIDE EDGE LEFTOUS
-          (2, 0): S.y,
-          (3, 0): S.o,
-          (2, 1): S.o,
-          (3, 1): S.b,
-        };
+        return RevengeCaseImageReference(
+          ub: (S.b, S.r, S.o, S.y),
+          uf: (S.y, S.b, S.r, S.r),
+          ur: (S.r, S.o, S.b, S.y),
+          ul: (S.y, S.o, S.o, S.b),
+        );
+    case RevengeCase.fourCycleSymmetricSmallPairs:
+      return RevengeCaseImageReference(
+        ub: (S.g, S.o, S.r, S.y),
+        uf: (S.r, S.r, S.y, S.b),
+        ul: (S.g, S.r, S.r, S.y),
+        ur: (S.o, S.r, S.y, S.b),
+      );
+    case RevengeCase.fourCycleSymmetricBigPairs:
+      return RevengeCaseImageReference(
+        ub: (S.g, S.r, S.y, S.y),
+        uf: (S.y, S.g, S.b, S.r),
+        ul: (S.g, S.r, S.r, S.y),
+        ur: (S.y, S.g, S.b, S.y),
+      );
+    case RevengeCase.fourCycleSymmetricFlippedPairs:
+
+    case RevengeCase.fourCycleDiagonalSmallPairs:
+
+    case RevengeCase.fourCycleDiagonalSmallLong:
+
+    case RevengeCase.fourCycleDiagonalSmallLongFlipped:
+
+    case RevengeCase.fourCycleSmallLeftLine:
+
+    case RevengeCase.fourCycleSmallRightLine:
+
+    case RevengeCase.fourCycleBigPairLeftLine:
+
+    case RevengeCase.fourCycleBigPairRightLine:
+
+    case RevengeCase.fourCycleAdjacentSmallPairs:
+
+    case RevengeCase.fourCycleAdjacentBigPairs:
+
+    case RevengeCase.fourCycleHydraulische:
+
+      return RevengeCaseImageReference();
+    case RevengeCase.fourCycleOppositeBigPairs:
+
+      case RevengeCase.twoCycleAdjacentFlipped:
+        return RevengeCaseImageReference(
+          uf: (S.o, S.b, S.y, S.y),
+          ur: (S.y, S.y, S.b, S.o),
+        );
+      case RevengeCase.twoCycleAdjacentOriented:
+        return RevengeCaseImageReference(
+          uf: (S.b, S.b, S.o, S.r),
+          ur: (S.b, S.b, S.o, S.r),
+        );
+      case RevengeCase.twoCycleOppositeFlipped:
+        return RevengeCaseImageReference(
+          uf: (S.g, S.b, S.y, S.r),
+          ur: (S.g, S.b, S.y, S.r),
+        );
+      case RevengeCase.twoCycleOppositeOriented:
+        return RevengeCaseImageReference(
+          uf: (S.y, S.g, S.b, S.y),
+          ur: (S.y, S.b, S.g, S.y),
+        );
+      case RevengeCase.twoCyclesFLSlotFlipped:
+        return RevengeCaseImageReference(
+          uf: (S.b, S.o, S.y, S.y),
+          fl: (S.o, S.b, S.y, S.y),
+        );
+      case RevengeCase.twoCyclesFLSlotOriented:
+      return RevengeCaseImageReference(
+          uf: (S.o, S.y, S.g, S.g),
+          fl: (S.g, S.g, S.o, S.y),
+        );
+      case RevengeCase.twoCyclesFRSlotFlipped:
+        return RevengeCaseImageReference(
+          uf: (S.o, S.y, S.g, S.g),
+          fr: (S.g, S.g, S.o, S.y),
+        );
+      case RevengeCase.twoCyclesFRSlotOriented:
+        return RevengeCaseImageReference(
+          uf: (S.y, S.o, S.o, S.g),
+          fr: (S.g, S.o, S.o, S.y),
+        );
+    case RevengeCase.twoTwoCycleHperm:
+      return RevengeCaseImageReference(
+        ub: (S.o, S.g, S.b, S.r),
+        uf: (S.o, S.g, S.b, S.r),
+        ul: (S.g, S.g, S.y, S.o),
+        ur: (S.g, S.g, S.y, S.o),
+      );
+    case RevengeCase.twoTwoCycleFlipHperm:
+      return RevengeCaseImageReference(
+        ub: (S.y, S.g, S.g, S.r),
+        uf: (S.r, S.g, S.g, S.y),
+        ul: (S.r, S.o, S.b, S.b),
+        ur: (S.r, S.o, S.b, S.b),
+      );
+    case RevengeCase.twoTwoCycleDotHperm:
+      return RevengeCaseImageReference(
+        ub: (S.y, S.y, S.r, S.g),
+        uf: (S.g, S.r, S.y, S.y),
+        ul: (S.o, S.o, S.y, S.g),
+        ur: (S.g, S.y, S.o, S.o),
+      );
+    case RevengeCase.twoTwoCycleZperm:
+      return RevengeCaseImageReference(
+        ub: (S.o, S.y, S.y, S.r),
+        uf: (S.g, S.b, S.o, S.r),
+        ul: (S.o, S.y, S.y, S.r),
+        ur: (S.g, S.b, S.o, S.r),
+      );
+    case RevengeCase.twoTwoCycleFlipZperm:
+      return RevengeCaseImageReference(
+        ub: (S.r, S.r, S.b, S.y),
+        uf: (S.o, S.y, S.g, S.g),
+        ul: (S.r, S.r, S.b, S.y),
+        ur: (S.g, S.g, S.y, S.o),
+      );
+    case RevengeCase.twoTwoCycleDotZperm:
+      return RevengeCaseImageReference(
+        ub: (S.o, S.r, S.b, S.g),
+        uf: (S.r, S.b, S.y, S.r),
+        ul: (S.g, S.b, S.r, S.o),
+        ur: (S.r, S.y, S.b, S.r),
+      );
+
       default:
-        return {};
+        return RevengeCaseImageReference();
     }
   }
 }

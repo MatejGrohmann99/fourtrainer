@@ -4,7 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fourtrainer/sections/scramble_section.dart';
-import 'package:fourtrainer/sections/statistics_section.dart';
+import 'package:fourtrainer/sections/settings_section.dart';
+import 'package:fourtrainer/storage/session_bucket.dart';
 import 'package:fourtrainer/util/snackbar.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +25,7 @@ class TimerSection extends StatelessWidget {
           children: [
             Expanded(
               child: KeyboardListener(
-                focusNode: FocusNode()..requestFocus(),
+                focusNode: controller.focusNode,
                 onKeyEvent: (event) {
                   controller.onKeyEventHandler(event, context);
                 },
@@ -100,6 +101,8 @@ class TimerSection extends StatelessWidget {
 class TimerController extends GetxController {
   static TimerController get to => Get.find();
 
+  final FocusNode focusNode = FocusNode();
+
   DateTime? timerStartTime;
 
   bool get isTimerRunning => timerStartTime != null;
@@ -111,7 +114,14 @@ class TimerController extends GetxController {
   Timer? timer;
 
   @override
+  void onReady() {
+    focusNode.requestFocus();
+    super.onReady();
+  }
+
+  @override
   void onClose() {
+    focusNode.dispose();
     timer?.cancel();
     super.onClose();
   }
@@ -145,8 +155,10 @@ class TimerController extends GetxController {
             duration: lastTime,
             when: now,
           );
+
           ScrambleController.to.onAddTime(context, sessionTime);
-          StatisticsController.to.onAddTime(sessionTime);
+          SettingsController.to.onAddTime(sessionTime);
+          SessionBucket().saveSessionToPersistence(SessionBucket().session.addTime(sessionTime));
 
           update();
         } else {

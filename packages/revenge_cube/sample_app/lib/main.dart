@@ -16,7 +16,10 @@ class _MyAppState extends State<MyApp> {
   final scrambleHandler = RevengeScrambler();
 
   final List<RevengeCase> casesSelected = [];
-  RevengeScramble? scramble;
+  RevengeScramble? scramble = RevengeScramble(
+    scramble: 'RURU',
+    situation: RevengeCase.twoCyclesFRSlotFlipped,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class _MyAppState extends State<MyApp> {
                 Text('Scramble: ${scramble?.scramble}'),
                 Text('Name: ${scramble?.situation?.displayName}'),
                 RevengeCubeWidget(
-                  gridColors: scramble?.situation?.ui,
+                  colors: scramble?.situation?.ui,
                 ),
                 Text('Algorithm: ${scramble?.situation?.alg}'),
                 ElevatedButton(
@@ -109,7 +112,7 @@ class _MyAppState extends State<MyApp> {
                             subtitle: RevengeCubeWidget(
                               width: 50,
                               height: 50,
-                              gridColors: caseSelected.ui,
+                              colors: caseSelected.ui,
                             ),
                           ),
                         ),

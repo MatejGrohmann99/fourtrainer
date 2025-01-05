@@ -4,16 +4,14 @@ class StripedBorderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color.fromRGBO(100, 100, 46, 1) // Color of the stripe
-      ..strokeWidth = 2 // Thickness of the stripe
+      ..color = const Color.fromRGBO(100, 100, 46, 1)
+      ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    // Define the dash pattern
     const double dashWidth = 5;
     const double dashSpace = 5;
     double startX = 0;
 
-    // Top border
     while (startX < size.width) {
       canvas.drawLine(
         Offset(startX, 0),
@@ -24,7 +22,6 @@ class StripedBorderPainter extends CustomPainter {
     }
 
     startX = 0;
-    // Bottom border
     while (startX < size.width) {
       canvas.drawLine(
         Offset(startX, size.height),
@@ -35,7 +32,6 @@ class StripedBorderPainter extends CustomPainter {
     }
 
     double startY = 0;
-    // Left border
     while (startY < size.height) {
       canvas.drawLine(
         Offset(0, startY),
@@ -46,7 +42,6 @@ class StripedBorderPainter extends CustomPainter {
     }
 
     startY = 0;
-    // Right border
     while (startY < size.height) {
       canvas.drawLine(
         Offset(size.width, startY),
@@ -59,7 +54,7 @@ class StripedBorderPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false; // No need to repaint unless properties change
+    return false;
   }
 }
 

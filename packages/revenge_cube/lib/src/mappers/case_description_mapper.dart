@@ -1,30 +1,133 @@
 import 'package:revenge_cube/src/domain/enums/revenge_case.dart';
 
 extension CaseDescriptionMapper on RevengeCase {
-  String get displayName {
+  String get categoryName {
     switch (this) {
       case RevengeCase.threeCycleBackGood:
-        return '3-Cycle / Back Good';
       case RevengeCase.threeCycleFlippedJPerm:
-        return '3-Cycle / Flipped J perm';
       case RevengeCase.threeCycleUperm:
-        return '3-Cycle / U perm';
       case RevengeCase.threeCycleBackBad:
-        return '3-Cycle / Back Bad';
       case RevengeCase.threeCycleJperm:
-        return '3-Cycle / J Perm';
       case RevengeCase.threeCycleFrontGood:
-        return '3-Cycle / Front Good';
       case RevengeCase.threeCycleFrontBad:
-        return '3-Cycle / Front Bad';
       case RevengeCase.threeCycleFlippedUPerm:
-        return '3-Cycle / flipped U perm';
+        return '3-Cycle';
       case RevengeCase.fourCycleTwoSplitPairsSymmetricRight:
-        return '4-Cycle / Two Split Pairs Symmetric Right';
       case RevengeCase.fourCycleTwoSplitPairsSymmetricLeft:
-        return '4-Cycle / Two Split Pairs Symmetric Left';
-      default:
-        return name;
+      case RevengeCase.fourCycleSymmetricSmallPairs:
+      case RevengeCase.fourCycleSymmetricBigPairs:
+      case RevengeCase.fourCycleSymmetricFlippedPairs:
+      case RevengeCase.fourCycleDiagonalSmallPairs:
+      case RevengeCase.fourCycleDiagonalSmallLong:
+      case RevengeCase.fourCycleDiagonalSmallLongFlipped:
+      case RevengeCase.fourCycleSmallLeftLine:
+      case RevengeCase.fourCycleSmallRightLine:
+      case RevengeCase.fourCycleBigPairLeftLine:
+      case RevengeCase.fourCycleBigPairRightLine:
+      case RevengeCase.fourCycleAdjacentSmallPairs:
+      case RevengeCase.fourCycleAdjacentBigPairs:
+      case RevengeCase.fourCycleHydraulische:
+      case RevengeCase.fourCycleOppositeBigPairs:
+        return '4-Cycle';
+      case RevengeCase.twoCycleAdjacentFlipped:
+      case RevengeCase.twoCycleAdjacentOriented:
+      case RevengeCase.twoCycleOppositeFlipped:
+      case RevengeCase.twoCycleOppositeOriented:
+      case RevengeCase.twoCyclesFLSlotFlipped:
+      case RevengeCase.twoCyclesFLSlotOriented:
+      case RevengeCase.twoCyclesFRSlotFlipped:
+      case RevengeCase.twoCyclesFRSlotOriented:
+        return '2 edges';
+      case RevengeCase.twoTwoCycleHperm:
+      case RevengeCase.twoTwoCycleFlipHperm:
+      case RevengeCase.twoTwoCycleDotHperm:
+      case RevengeCase.twoTwoCycleZperm:
+      case RevengeCase.twoTwoCycleFlipZperm:
+      case RevengeCase.twoTwoCycleDotZperm:
+        return '2-2 Cycle';
+    }
+  }
+
+  String get displayName => '$categoryName / $caseName';
+
+  String get caseName {
+    switch (this) {
+      case RevengeCase.threeCycleBackGood:
+        return 'Back Good';
+      case RevengeCase.threeCycleFlippedJPerm:
+        return 'Flipped J perm';
+      case RevengeCase.threeCycleUperm:
+        return 'U perm';
+      case RevengeCase.threeCycleBackBad:
+        return 'Back Bad';
+      case RevengeCase.threeCycleJperm:
+        return 'J Perm';
+      case RevengeCase.threeCycleFrontGood:
+        return 'Front Good';
+      case RevengeCase.threeCycleFrontBad:
+        return 'Front Bad';
+      case RevengeCase.threeCycleFlippedUPerm:
+        return 'Flipped U perm';
+      case RevengeCase.fourCycleTwoSplitPairsSymmetricRight:
+        return 'Two Split Pairs Symmetric Right';
+      case RevengeCase.fourCycleTwoSplitPairsSymmetricLeft:
+        return 'Two Split Pairs Symmetric Left';
+      case RevengeCase.fourCycleSymmetricSmallPairs:
+        return 'Symmetric Small Pairs';
+      case RevengeCase.fourCycleSymmetricBigPairs:
+        return 'Symmetric Big Pairs';
+      case RevengeCase.fourCycleSymmetricFlippedPairs:
+        return 'Symmetric Flipped Pairs';
+      case RevengeCase.fourCycleDiagonalSmallPairs:
+        return 'Diagonal Small Pairs';
+      case RevengeCase.fourCycleDiagonalSmallLong:
+        return 'Diagonal Small Long';
+      case RevengeCase.fourCycleDiagonalSmallLongFlipped:
+        return 'Diagonal Small Long Flipped';
+      case RevengeCase.fourCycleSmallLeftLine:
+        return 'Small Left Line';
+      case RevengeCase.fourCycleSmallRightLine:
+        return 'Small Right Line';
+      case RevengeCase.fourCycleBigPairLeftLine:
+        return 'Big Pair Left Line';
+      case RevengeCase.fourCycleBigPairRightLine:
+        return 'Big Pair Right Line';
+      case RevengeCase.fourCycleAdjacentSmallPairs:
+        return 'Adjacent Small Pairs';
+      case RevengeCase.fourCycleAdjacentBigPairs:
+        return 'Adjacent Big Pairs';
+      case RevengeCase.fourCycleHydraulische:
+        return 'Hydraulische';
+      case RevengeCase.fourCycleOppositeBigPairs:
+        return 'Opposite Big Pairs';
+      case RevengeCase.twoCycleAdjacentFlipped:
+        return 'Adjacent Flipped';
+      case RevengeCase.twoCycleAdjacentOriented:
+        return 'Adjacent Oriented';
+      case RevengeCase.twoCycleOppositeFlipped:
+        return 'Opposite Flipped';
+      case RevengeCase.twoCycleOppositeOriented:
+        return 'Opposite Oriented';
+      case RevengeCase.twoCyclesFLSlotFlipped:
+        return 'FL Slot Flipped';
+      case RevengeCase.twoCyclesFLSlotOriented:
+        return 'FL Slot Oriented';
+      case RevengeCase.twoCyclesFRSlotFlipped:
+        return 'FR Slot Flipped';
+      case RevengeCase.twoCyclesFRSlotOriented:
+        return 'FR Slot Oriented';
+      case RevengeCase.twoTwoCycleHperm:
+        return 'H perm';
+      case RevengeCase.twoTwoCycleFlipHperm:
+        return 'Flip H perm';
+      case RevengeCase.twoTwoCycleDotHperm:
+        return 'Dot H perm';
+      case RevengeCase.twoTwoCycleZperm:
+        return 'Z perm';
+      case RevengeCase.twoTwoCycleFlipZperm:
+        return 'Flip Z perm';
+      case RevengeCase.twoTwoCycleDotZperm:
+        return 'Dot Z perm';
     }
   }
 }
