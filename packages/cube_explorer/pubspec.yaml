@@ -1,5 +1,5 @@
 name: cube_explorer
-description: "A new Flutter package project."
+description: "Simple filter generator for cube explorer"
 version: 0.0.1
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 

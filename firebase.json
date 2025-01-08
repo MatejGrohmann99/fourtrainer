@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "fourbyfour",
     "source": ".",
     "ignore": [
       "firebase.json",

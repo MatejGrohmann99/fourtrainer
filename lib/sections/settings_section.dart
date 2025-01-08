@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fourtrainer/domain/session_config.dart';
 import 'package:fourtrainer/domain/session_time.dart';
+import 'package:fourtrainer/sections/scramble_section.dart';
 import 'package:fourtrainer/storage/config_bucket.dart';
 import 'package:get/get.dart';
 import 'package:revenge_cube/revenge_cube.dart';
@@ -37,6 +38,11 @@ class SettingsSection extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
+                  if (controller.showIMessedUpButton)
+                    OutlinedButton(
+                      child: Text('Repeat this case'),
+                      onPressed: controller.onRepeatCasePressed,
+                    ),
                 ],
               ),
             ),
@@ -55,6 +61,10 @@ class SettingsController extends GetxController {
   SessionConfig config = ConfigBucket().config;
 
   SessionTime? lastTime;
+
+  bool get showIMessedUpButton {
+    return ScrambleController.to.config.repeatEachCaseOnce && !ScrambleController.to.config.casesSelected.contains(lastTime?.scramble?.situation);
+  }
 
   void onAddTime(SessionTime time) {
     lastTime = time;
@@ -78,5 +88,11 @@ class SettingsController extends GetxController {
       config = ConfigBucket().config;
       update();
     }
+  }
+
+  void onRepeatCasePressed() {
+    ScrambleController.to.repeatCase(lastTime?.scramble?.situation).then((_) {
+      update();
+    });
   }
 }

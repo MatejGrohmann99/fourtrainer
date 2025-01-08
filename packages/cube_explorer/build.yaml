@@ -6,10 +6,10 @@ targets:
 
 builders:
   generators:
-    target: ":cubeExplorerBuilder" # Generator name
+    target: ":cubeExplorerBuilder"
     import: "package:cube_explorer/cube_explorer.dart"
-    builder_factories: ["cubeExplorerBuilder"] # Builder name(BuilderOption) this is a definition
-    build_extensions: { ".dart": [".g.part"] }
+    builder_factories: [ "cubeExplorerBuilder" ]
+    build_extensions: { ".dart": [ ".g.part" ] }
     auto_apply: dependents
     build_to: cache
-    applies_builders: ["source_gen|combining_builder"]
+    applies_builders: [ "source_gen|combining_builder" ]

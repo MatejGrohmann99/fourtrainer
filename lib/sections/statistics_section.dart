@@ -16,34 +16,38 @@ class StatisticsSection extends StatelessWidget {
     return GetBuilder<StatisticsController>(
       init: StatisticsController(),
       builder: (controller) {
+        if (controller.session.times.isEmpty) return const SizedBox.shrink();
         final timesReversed = controller.session.times.reversed.toList();
         final isLargeTablet = context.isLargeTablet;
 
         if (isLargeTablet) {
           return Container(
-            padding: const EdgeInsets.only(left: 36, right: 36),
+            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
             width: 400,
             height: double.infinity,
             child: Card(
               child: Column(
                 children: [
                   SizedBox(
-                    width: 300,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            controller.session.name,
-                            style: Theme.of(context).textTheme.titleLarge,
+                    width: 400,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              controller.session.name,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            controller.onClearSessionPressed(context);
-                          },
-                          icon: const Icon(Icons.delete),
-                        ),
-                      ],
+                          IconButton(
+                            onPressed: () {
+                              controller.onClearSessionPressed(context);
+                            },
+                            icon: const Icon(Icons.delete),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
@@ -324,6 +328,10 @@ class StatisticsController extends GetxController {
     syncStorage(session.updateTimeAt(index, newTime));
   }
 
+  void updateTime(SessionTime Function(SessionTime) newTime, int index) {
+    syncStorage(session.updateTimeAt(index, newTime(session.times[index])));
+  }
+
   void disqualificationToggled(int index) {
     final time = session.times[index];
     final newTime = time.copyWith(hasDNF: !time.hasDNF);
@@ -341,7 +349,6 @@ class StatisticsController extends GetxController {
       },
     );
   }
-
 
   void syncStorage(Session session) async {
     await SessionBucket().saveSessionToPersistence(

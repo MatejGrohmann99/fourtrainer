@@ -15,6 +15,12 @@
       <excludeFolder url="file://$MODULE_DIR$/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/revenge_cube/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/revenge_cube/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/revenge_cube/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/revenge_cube/sample_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/revenge_cube/sample_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/revenge_cube/sample_app/build" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/flutter_secure_storage_windows/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/flutter_secure_storage_windows/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/flutter_secure_storage_windows/build" />
@@ -27,6 +33,12 @@
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/cube_core/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/cube_core/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/cube_core/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/cube_explorer/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/cube_explorer/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/cube_explorer/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

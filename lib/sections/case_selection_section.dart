@@ -18,7 +18,7 @@ class CaseSelection extends StatelessWidget {
       builder: (controller) {
         final isTablet = context.isTablet;
         return Container(
-          padding: isTablet ? const EdgeInsets.all(32) : const EdgeInsets.all(8),
+          padding: isTablet ? const EdgeInsets.all(24) : const EdgeInsets.all(8),
           width: double.infinity,
           height: isTablet ? 400 : 300,
           child: Card(

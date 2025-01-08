@@ -13,3 +13,4 @@ class CubeExplorerAnnotation {
     required this.maxNumberOfDoubleTurns,
   });
 }
+

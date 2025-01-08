@@ -22,7 +22,7 @@ class ScrambleSection extends StatelessWidget {
           curve: Curves.easeInOut,
           child: controller.isScrambleVisible
               ? Container(
-                  padding: isTablet ? const EdgeInsets.all(36) : const EdgeInsets.all(8),
+                  padding: isTablet ? const EdgeInsets.all(24) : const EdgeInsets.all(8),
                   width: double.infinity,
                   height: isTablet ? 200 : 120,
                   child: Card(
@@ -54,18 +54,23 @@ class ScrambleSection extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              IconButton(
-                                iconSize: 32,
-                                icon: const Icon(Icons.refresh),
-                                onPressed: controller.onRefreshScramble,
-                              ),
+                              if (controller.config.casesSelected.isNotEmpty)
+                                IconButton(
+                                  iconSize: 32,
+                                  icon: const Icon(Icons.refresh),
+                                  onPressed: controller.onRefreshScramble,
+                                ),
                               const SizedBox(
                                 width: 5,
                               ),
                             ],
                           ),
                         ),
-                        Text('You have selected ${controller.config.casesSelected.length} cases'),
+                        Text(
+                          controller.caseSelectionMessage,
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        const SizedBox(height: 2),
                       ],
                     ),
                   ),
@@ -92,6 +97,16 @@ class ScrambleController extends GetxController {
   final RevengeScrambler _scrambler = RevengeScrambler();
 
   final configStorageKey = 'scrambleControllerData';
+
+  String get caseSelectionMessage {
+    if (config.casesSelected.isEmpty) {
+      return 'Select at least one case to start training';
+    }
+    if (configOrigin case final origin?) {
+      return '${config.casesSelected.length}/${origin.casesSelected.length}';
+    }
+    return '${config.casesSelected.length} cases selected';
+  }
 
   @override
   void onReady() {
@@ -173,5 +188,11 @@ class ScrambleController extends GetxController {
     );
 
     update();
+  }
+
+  Future<void> repeatCase(RevengeCase? situation) async {
+    if (situation == null) return;
+    config = config.addCases([situation]);
+    updateScrambleConfig(config);
   }
 }

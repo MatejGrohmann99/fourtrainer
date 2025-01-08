@@ -15,10 +15,15 @@ class ApplicationTheme {
 
     final cardTheme = themeData.cardTheme.copyWith(
       shape: const RoundedRectangleBorder(
+        side: BorderSide(
+          color: Colors.white,
+          width: 0.2,
+        ),
         borderRadius: BorderRadius.zero,
       ),
       color: const Color.fromRGBO(82, 56, 46, 1),
       margin: const EdgeInsets.all(0),
+      shadowColor: const Color.fromRGBO(80, 50, 50, 0.4),
     );
 
     final alertDialog = themeData.dialogTheme.copyWith(
