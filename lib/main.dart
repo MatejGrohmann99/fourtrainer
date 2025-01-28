@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fourtrainer/alg_sheet/alg_sheet_view.dart';
 import 'package:fourtrainer/config/theme.dart';
+import 'package:fourtrainer/sections/image_gen_view.dart';
 import 'package:fourtrainer/sections/scramble_section.dart';
 import 'package:fourtrainer/sections/statistics_section.dart';
 import 'package:fourtrainer/services/storage_service.dart';
+import 'package:fourtrainer/sheets/no_pll_alg_sheets.dart';
+import 'package:fourtrainer/sheets/no_swap_u_parity.dart';
 import 'package:fourtrainer/util/shortcuts_manager.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -26,11 +30,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     const theme = ApplicationTheme();
 
-    return MaterialApp(
+    return GetMaterialApp(
       title: '4x4 Edge trainer',
       darkTheme: theme.themeData,
       themeMode: ThemeMode.dark,
-      home: const AppPage(),
+      routes: {
+        '/': (context) => const AppPage(),
+        '/generate': (context) => const ImageGenPage(),
+        '/panbezpll': (context) => AlgSheetView(
+              sheets: getNoPllAlgSheets(),
+            ),
+      },
     );
   }
 }

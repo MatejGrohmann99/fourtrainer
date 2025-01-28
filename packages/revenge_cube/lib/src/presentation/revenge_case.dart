@@ -70,13 +70,15 @@ class _GridPainter extends CustomPainter {
 final _mapper = RevengeCaseImageParser();
 
 class RevengeCubeWidget extends StatelessWidget {
-  const RevengeCubeWidget({this.width = 150, this.height = 150, super.key, this.colors});
+  const RevengeCubeWidget({this.width = 150, this.height = 150, super.key, this.colors, this.gridColorsOverride});
 
   final double width;
 
   final double height;
 
   final RevengeCaseImageReference? colors;
+
+  final List<List<Sticker?>>? gridColorsOverride;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +93,7 @@ class RevengeCubeWidget extends StatelessWidget {
 
     final sideEdges = <(int, int), Color>{};
 
-    final gridColors = _mapper.parseReference(colors);
+    final gridColors = _mapper.parseReference(colors, gridColorsOverride);
 
     gridColors.forEach(
       (key, color) {
