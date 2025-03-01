@@ -13,6 +13,12 @@ enum RevengeMove {
   mF('F'),
   mFi('F\''),
   mF2('F2'),
+  mD('D'),
+  mDi('D\''),
+  mD2('D2'),
+  mB('B'),
+  mBi('B\''),
+  mB2('B2'),
   mLP(null),
   mDP(null);
 
@@ -70,6 +76,18 @@ enum RevengeMove {
         return RevengeMove.mLP;
       case 'DP':
         return RevengeMove.mDP;
+      case 'B':
+        return RevengeMove.mB;
+      case 'B\'':
+        return RevengeMove.mBi;
+      case 'B2':
+        return RevengeMove.mB2;
+      case 'D':
+        return RevengeMove.mD;
+      case 'D\'':
+        return RevengeMove.mDi;
+      case 'D2':
+        return RevengeMove.mD2;
       default:
         return null;
     }
@@ -111,8 +129,26 @@ enum RevengeMove {
         return [mF2];
       case mLP:
         return [mLP];
+      case mB:
+        return [mBi];
+      case mBi:
+        return [mB];
+      case mB2:
+        return [mB2];
+      case mD:
+        return [mDi];
+      case mDi:
+        return [mD];
+      case mD2:
+        return [mD2];
+
       case mDP:
         return [mU2, mDP, mU2];
     }
+  }
+
+  @override
+  String toString() {
+    return value ?? '';
   }
 }

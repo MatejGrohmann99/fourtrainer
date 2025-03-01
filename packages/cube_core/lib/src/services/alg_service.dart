@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import '../domain/cube_move_enum.dart';
 
@@ -25,10 +25,8 @@ class AlgService {
         }
         alg.add(move);
       } catch (e, s) {
-        log(
+        print(
           e.toString(),
-          name: 'getAlgorithmFromString',
-          stackTrace: s,
         );
         continue;
       }

@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import '../config/constants.dart';
 
 typedef CSE = CubeStateEntity;
@@ -33,24 +31,24 @@ class CubeStateEntity {
   bool operator ==(Object other) {
     if (other is! CubeStateEntity) return false;
 
-    return listEquals(state[0][0], other.state[0][0]) &&
-        listEquals(state[0][1], other.state[0][1]) &&
-        listEquals(state[0][2], other.state[0][2]) &&
-        listEquals(state[1][0], other.state[1][0]) &&
-        listEquals(state[1][1], other.state[1][1]) &&
-        listEquals(state[1][2], other.state[1][2]) &&
-        listEquals(state[2][0], other.state[2][0]) &&
-        listEquals(state[2][1], other.state[2][1]) &&
-        listEquals(state[2][2], other.state[2][2]) &&
-        listEquals(state[3][0], other.state[3][0]) &&
-        listEquals(state[3][1], other.state[3][1]) &&
-        listEquals(state[3][2], other.state[3][2]) &&
-        listEquals(state[4][0], other.state[4][0]) &&
-        listEquals(state[4][1], other.state[4][1]) &&
-        listEquals(state[4][2], other.state[4][2]) &&
-        listEquals(state[5][0], other.state[5][0]) &&
-        listEquals(state[5][1], other.state[5][1]) &&
-        listEquals(state[5][2], other.state[5][2]);
+    return _equals(state[0][0], other.state[0][0]) &&
+        _equals(state[0][1], other.state[0][1]) &&
+        _equals(state[0][2], other.state[0][2]) &&
+        _equals(state[1][0], other.state[1][0]) &&
+        _equals(state[1][1], other.state[1][1]) &&
+        _equals(state[1][2], other.state[1][2]) &&
+        _equals(state[2][0], other.state[2][0]) &&
+        _equals(state[2][1], other.state[2][1]) &&
+        _equals(state[2][2], other.state[2][2]) &&
+        _equals(state[3][0], other.state[3][0]) &&
+        _equals(state[3][1], other.state[3][1]) &&
+        _equals(state[3][2], other.state[3][2]) &&
+        _equals(state[4][0], other.state[4][0]) &&
+        _equals(state[4][1], other.state[4][1]) &&
+        _equals(state[4][2], other.state[4][2]) &&
+        _equals(state[5][0], other.state[5][0]) &&
+        _equals(state[5][1], other.state[5][1]) &&
+        _equals(state[5][2], other.state[5][2]);
   }
 
   @override
@@ -74,4 +72,31 @@ class CubeStateEntity {
       state[5][0].hashCode ^
       state[5][1].hashCode ^
       state[5][2].hashCode;
+}
+
+bool _equals(List<int>? a, List<int>? b) {
+  if (a == null) {
+    return b == null;
+  }
+  if (b == null || a.length != b.length) {
+    return false;
+  }
+  if (identicalInt(a, b)) {
+    return true;
+  }
+  for (int index = 0; index < a.length; index += 1) {
+    if (a[index] != b[index]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool identicalInt(List<int> a, List<int> b) {
+  for (int index = 0; index < a.length; index += 1) {
+    if (a[index] != b[index]) {
+      return false;
+    }
+  }
+  return true;
 }

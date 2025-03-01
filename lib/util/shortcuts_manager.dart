@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fourtrainer/sections/statistics_section.dart';
+import 'package:fourtrainer/features/edge_pairing_trainer/sections/statistics_section.dart';
 import 'package:get/get.dart';
 
 import 'dialog.dart';

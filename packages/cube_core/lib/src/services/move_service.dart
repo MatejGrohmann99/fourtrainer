@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '../domain/index.dart';
 
 class MoveService {
@@ -1259,10 +1257,8 @@ class MoveService {
 
         o = n.clone();
       } catch (e, s) {
-        log(
+        print(
           e.toString(),
-          name: 'performMove: ${move.name}',
-          stackTrace: s,
         );
         continue;
       }
