@@ -113,7 +113,7 @@ enum RevengeCase {
     setup: Setup.ufurSwapSetup,
     adjust: Setup.twoTwoCycleSetup,
     trigger: Setup.fiveMoveTrigger,
-    json: 'twoTwoCycleFlipZperm',
+    json: 'twoTwoCycleFlipHperm',
   ),
   twoTwoCycleDotHperm(
     setup: Setup.ufurSwapTwistUR,
@@ -125,7 +125,7 @@ enum RevengeCase {
     setup: Setup.ufFlipSetup,
     adjust: Setup.twoTwoCycleSetup,
     trigger: Setup.fiveMoveTrigger,
-    json: 'twoTwoCycleHperm',
+    json: 'twoTwoCycleZperm',
   ),
   twoTwoCycleFlipZperm(
     setup: Setup.noFlipSetup,
@@ -137,7 +137,7 @@ enum RevengeCase {
     setup: Setup.urFlipSetup,
     adjust: Setup.twoTwoCycleSetup,
     trigger: Setup.fiveMoveTrigger,
-    json: 'twoTwoCycleDotHperm',
+    json: 'twoTwoCycleDotZPerm',
   ),
 
   /// FOUR CYCLES

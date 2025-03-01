@@ -20,7 +20,7 @@ class CaseSelection extends StatelessWidget {
         return Container(
           padding: isTablet ? const EdgeInsets.all(24) : const EdgeInsets.all(8),
           width: double.infinity,
-          height: isTablet ? 400 : 300,
+          height: isTablet ? 450 : 350,
           child: Card(
             child: Column(
               children: [
@@ -114,6 +114,12 @@ class CaseSelection extends StatelessWidget {
                   onTap: () {
                     controller.toggleRandomizeAuf();
                   },
+                ),
+                ListTile(
+                  trailing: Text(
+                    'Selected cases: ${controller.config.casesSelected.length}',
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
                 ),
               ],
             ),
