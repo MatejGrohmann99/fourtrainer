@@ -44,7 +44,8 @@ class CubeExplorerGenerator extends GeneratorForAnnotation<CubeExplorerAnnotatio
         final algorithms = parseAlgorithms(e.$2);
         return '''
     int get ${e.$1}Length => ${algorithms.$2};
-    List<String> get ${e.$1} => [${algorithms.$1}];
+    List<String> get ${e.$1} => ${e.$1}_constValue;
+    static const List<String> ${e.$1}_constValue = [${algorithms.$1}];
     ''';
       },
     ).join('\n');

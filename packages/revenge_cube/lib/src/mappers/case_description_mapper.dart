@@ -45,6 +45,14 @@ extension CaseDescriptionMapper on RevengeCase {
       case RevengeCase.twoTwoCycleFlipZperm:
       case RevengeCase.twoTwoCycleDotZperm:
         return '2-2 Cycle';
+      case RevengeCase.frSlot3_rightySplit:
+      case RevengeCase.frSlot3_leftyLine:
+      case RevengeCase.frSlot3_smallBlockLeft:
+      case RevengeCase.frSlot3_rightyFlipousUp:
+      case RevengeCase.frSlot3_bigBlockRight:
+      case RevengeCase.frSlot3_leftyFlipousUp:
+      case RevengeCase.frSlot3_leftySplit:
+        return 'FR 3-Cycle';
     }
   }
 
@@ -128,6 +136,20 @@ extension CaseDescriptionMapper on RevengeCase {
         return 'Flip Z perm';
       case RevengeCase.twoTwoCycleDotZperm:
         return 'Dot Z perm';
+      case RevengeCase.frSlot3_rightySplit:
+        return 'Righty Split';
+      case RevengeCase.frSlot3_leftyLine:
+        return 'Lefty Line';
+      case RevengeCase.frSlot3_smallBlockLeft:
+        return 'Small Block Left';
+        case RevengeCase.frSlot3_rightyFlipousUp:
+        return 'Righty Flipouš Up';
+      case RevengeCase.frSlot3_bigBlockRight:
+        return 'Big block right';
+      case RevengeCase.frSlot3_leftyFlipousUp:
+        return 'Lefty Flipouš Up';
+      case RevengeCase.frSlot3_leftySplit:
+        return 'Lefty Split';
     }
   }
 }

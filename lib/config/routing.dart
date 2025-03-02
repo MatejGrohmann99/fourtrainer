@@ -1,5 +1,6 @@
 import 'package:fourtrainer/features/generation/case_finder.dart';
 import 'package:fourtrainer/features/poll_discover/poll_discover_ruf_page.dart';
+import 'package:fourtrainer/features/sheet/four_cycle_sheet.dart';
 import 'package:fourtrainer/features/toilet_ll/tll_page.dart';
 
 import '../features/edge_pairing_trainer/edge_pairing_trainer_page.dart';
@@ -15,4 +16,5 @@ getAppRoutes() => {
       '/tll': (context) => const TllPage(),
       '/poll': (context) => const POllDiscoverPage(),
       '/poll/ruf': (context) => const POllRUFDiscoverPage(),
+      '/fourcycles': (context) => const FourCycleSheet(),
     };

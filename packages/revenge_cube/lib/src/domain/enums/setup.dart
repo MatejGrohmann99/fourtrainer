@@ -1,6 +1,10 @@
 import 'package:revenge_cube/src/algorithms/revenge_algorithms.dart';
 
-enum Setup {
+mixin SetupMixin {
+  List<String> getAlgorithms();
+}
+
+enum Setup with SetupMixin {
   twoCycleSetup,
   fourCycleSetup,
   twoTwoCycleSetup,
@@ -33,6 +37,7 @@ enum Setup {
   suneSetup,
   ;
 
+  @override
   List<String> getAlgorithms() {
     switch (this) {
       case Setup.twoTwoCycleSetup:

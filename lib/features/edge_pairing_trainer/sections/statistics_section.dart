@@ -18,9 +18,9 @@ class StatisticsSection extends StatelessWidget {
       builder: (controller) {
         if (controller.session.times.isEmpty) return const SizedBox.shrink();
         final timesReversed = controller.session.times.reversed.toList();
-        final isLargeTablet = context.isLargeTablet;
+        final isNotPhone = !context.isPhone;
 
-        if (isLargeTablet) {
+        if (isNotPhone) {
           return Container(
             padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
             width: 400,

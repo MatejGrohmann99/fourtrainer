@@ -6,6 +6,7 @@ class SessionConfig extends Equatable {
     required this.casesSelected,
     required this.repeatEachCaseOnce,
     required this.randomizeAuf,
+    required this.showFiveMoveTriggerAsBomb,
   });
 
   factory SessionConfig.initial() {
@@ -13,12 +14,14 @@ class SessionConfig extends Equatable {
       casesSelected: {},
       repeatEachCaseOnce: false,
       randomizeAuf: false,
+      showFiveMoveTriggerAsBomb: false,
     );
   }
 
   final Set<RevengeCase> casesSelected;
   final bool repeatEachCaseOnce;
   final bool randomizeAuf;
+  final bool showFiveMoveTriggerAsBomb;
 
   bool isEmpty() {
     return casesSelected.isEmpty;
@@ -44,11 +47,13 @@ class SessionConfig extends Equatable {
     Set<RevengeCase>? casesSelected,
     bool? repeatEachCaseOnce,
     bool? randomizeAuf,
+    bool? showFiveMoveTriggerAsBomb,
   }) {
     return SessionConfig(
       repeatEachCaseOnce: repeatEachCaseOnce ?? this.repeatEachCaseOnce,
       casesSelected: casesSelected ?? this.casesSelected,
       randomizeAuf: randomizeAuf ?? this.randomizeAuf,
+      showFiveMoveTriggerAsBomb: showFiveMoveTriggerAsBomb ?? this.showFiveMoveTriggerAsBomb,
     );
   }
 
@@ -57,6 +62,7 @@ class SessionConfig extends Equatable {
       'settingsConfigCaseSelectable': {
         'repeatEachCaseOnce': repeatEachCaseOnce,
         'casesSelected': casesSelected.map((e) => e.json).toList(),
+        'showFiveMoveTriggerAsBomb': showFiveMoveTriggerAsBomb,
         'randomizeAuf': randomizeAuf,
       }
     };
@@ -81,13 +87,21 @@ class SessionConfig extends Equatable {
 
     final randomizeAuf = settingsConfigCaseSelectable['randomizeAuf'] as bool?;
 
+    final showFiveMoveTriggerAsBomb = settingsConfigCaseSelectable['showFiveMoveTriggerAsBomb'] as bool?;
+
     return SessionConfig(
       casesSelected: casesSelected,
       repeatEachCaseOnce: repeatEachCaseOnce ?? false,
       randomizeAuf: randomizeAuf ?? false,
+      showFiveMoveTriggerAsBomb: showFiveMoveTriggerAsBomb ?? false,
     );
   }
 
   @override
-  List<Object?> get props => [casesSelected, repeatEachCaseOnce, randomizeAuf];
+  List<Object?> get props => [
+        casesSelected,
+        repeatEachCaseOnce,
+        randomizeAuf,
+        showFiveMoveTriggerAsBomb,
+      ];
 }

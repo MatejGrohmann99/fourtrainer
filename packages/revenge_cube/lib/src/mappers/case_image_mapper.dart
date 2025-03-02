@@ -249,6 +249,48 @@ extension CaseImageMapper on RevengeCase {
           ul: (S.g, S.b, S.r, S.o),
           ur: (S.r, S.y, S.b, S.r),
         );
+      case RevengeCase.frSlot3_rightySplit:
+        return RevengeCaseImageReference(
+          uf: (S.y, S.y, S.o, S.g),
+          ub: (S.g, S.g, S.y, S.r),
+          fr: (S.r, S.y, S.g, S.o),
+        );
+      case RevengeCase.frSlot3_leftyLine:
+        return RevengeCaseImageReference(
+          uf: (S.g, S.g, S.o, S.y),
+          ub: (S.g, S.r, S.o, S.y),
+          fr: (S.y, S.y, S.r, S.g),
+        );
+      case RevengeCase.frSlot3_smallBlockLeft:
+        return RevengeCaseImageReference(
+          uf: (S.r, S.g, S.y, S.r),
+          ur: (S.g, S.g, S.y, S.r),
+          fr: (S.y, S.y, S.r, S.g),
+        );
+      case RevengeCase.frSlot3_rightyFlipousUp:
+        return RevengeCaseImageReference(
+          uf: (S.g, S.o, S.r, S.y),
+          ur: (S.y, S.o, S.g, S.y),
+          fr: (S.r, S.g, S.g, S.y),
+        );
+      case RevengeCase.frSlot3_bigBlockRight:
+        return RevengeCaseImageReference(
+          uf: (S.b, S.g, S.y, S.o),
+          ur: (S.b, S.g, S.y, S.r),
+          fr: (S.r, S.o, S.g, S.g),
+        );
+      case RevengeCase.frSlot3_leftyFlipousUp:
+        return RevengeCaseImageReference(
+          uf: (S.o, S.y, S.g, S.g),
+          ur: (S.b, S.g, S.r, S.o),
+          fr: (S.y, S.r, S.g, S.b),
+        );
+      case RevengeCase.frSlot3_leftySplit:
+        return RevengeCaseImageReference(
+          ub: (S.b, S.r, S.o, S.b),
+          uf: (S.b, S.g, S.r, S.r),
+          fr: (S.b, S.r, S.o, S.g),
+        );
     }
   }
 }

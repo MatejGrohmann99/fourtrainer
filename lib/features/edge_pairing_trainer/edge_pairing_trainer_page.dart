@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -15,45 +13,46 @@ class EdgePairingTrainerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLargeTablet = context.isLargeTablet;
+    bool isNotMobile = !context.isPhone;
     const statisticsSection = StatisticsSection();
     const settingsSection = SettingsSection();
 
     return ShortcutsManager(
-      child: Scaffold(
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const ScrambleSection(),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (isLargeTablet) statisticsSection,
-                    const Expanded(
-                      child: TimerSection(),
-                    ),
-                    if (isLargeTablet) settingsSection,
-                  ],
+        child: Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const ScrambleSection(),
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (isNotMobile) statisticsSection,
+                const Expanded(
+                  child: TimerSection(),
                 ),
-              ),
-              if (!isLargeTablet) ...[
-                statisticsSection,
-                settingsSection,
+                if (isNotMobile) settingsSection,
               ],
-            ],
+            ),
           ),
-          floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              const url =
-                  'https://docs.google.com/spreadsheets/d/1enMcY6R5P_RlL4XQcguQ74A5ATte3lHDnIJYr1wTf54/edit?usp=sharing';
-              launchUrlString(url);
-            },
-            tooltip: 'Only source of truth',
-            child: const Icon(Icons.book_outlined),
-          )),
-    );
+          if (!isNotMobile) ...[
+            statisticsSection,
+            settingsSection,
+          ],
+        ],
+      ),
+      // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     const url =
+      //         'https://docs.google.com/spreadsheets/d/1enMcY6R5P_RlL4XQcguQ74A5ATte3lHDnIJYr1wTf54/edit?usp=sharing';
+      //     launchUrlString(url);
+      //   },
+      //   tooltip: 'Only source of truth',
+      //   child: const Icon(Icons.book_outlined),
+    )
+        //),
+        );
   }
 }

@@ -4,9 +4,19 @@ typedef RevengeCaseImagePiece = (Sticker, Sticker, Sticker, Sticker);
 
 class RevengeCaseImageReference {
   RevengeCaseImagePiece? fl;
+
+  /// fr: (S.r, S.y, S.g, S.o),
+  /// first two are F face, next to are R face
   RevengeCaseImagePiece? fr;
+
+  /// uf: (S.y, S.y, S.o, S.g)
+  /// first two are F face, next two are top face
   RevengeCaseImagePiece? uf;
+
+  ///ub: (S.g, S.g, S.y, S.r),
+  /// first two are B face, next to are top face
   RevengeCaseImagePiece? ub;
+
   RevengeCaseImagePiece? ul;
   RevengeCaseImagePiece? ur;
 

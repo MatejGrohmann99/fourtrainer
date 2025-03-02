@@ -1,5 +1,9 @@
+//ignore_for_file: named_constructors, constant_identifier_names
 import 'package:collection/collection.dart';
 import 'package:revenge_cube/src/domain/enums/setup.dart';
+
+import '../../algorithms/better/better_setup.dart';
+import '../lazy_setup.dart';
 
 enum RevengeCase {
   /// TWO CYCLES
@@ -100,6 +104,50 @@ enum RevengeCase {
     adjust: Setup.threeCycleSetup,
     trigger: Setup.fiveMoveTrigger,
     json: 'threeCycleFlippedUPerm',
+  ),
+
+  /// 3 CYCLES FR SLOT
+  frSlot3_rightySplit(
+    setup: LazySetup(BetterSetupExtension.UFUBFRNoSwapAlgorithm_constValue),
+    adjust: Setup.fInverseSexiSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'frSlot3_rightySplit',
+  ),
+  frSlot3_leftyLine(
+    setup: LazySetup(BetterSetupExtension.UBRFSwapUFWontMoveAlgorithm_constValue),
+    adjust: Setup.fInverseSexiSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'frSlot3_leftyLine',
+  ),
+  frSlot3_smallBlockLeft(
+    setup: LazySetup(BetterSetupExtension.FInvSexiButFrWontMoveAlgorithm_constValue),
+    adjust: Setup.fInverseSexiSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'frSlot3_smallBlockLeft',
+  ),
+  frSlot3_rightyFlipousUp(
+    setup: LazySetup(BetterSetupExtension.LUFUbutFRwontMoveAlgorithm_constValue),
+    adjust: Setup.fInverseSexiSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'frSlot3_rightyFlipousUp',
+  ),
+  frSlot3_bigBlockRight(
+    setup: LazySetup(BetterSetupExtension.RUFUbutFRwontMoveAlgorithm_constValue),
+    adjust: Setup.fInverseSexiSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'frSlot3_bigBlockRight',
+  ),
+  frSlot3_leftyFlipousUp(
+    setup: Setup.rightSexiMoveSetup,
+    adjust: Setup.fInverseSexiSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'frSlot3_leftyFlipousUp',
+  ),
+  frSlot3_leftySplit(
+    setup: LazySetup(BetterSetupExtension.UFUBFlipFRWontMoveAlgorithm_constValue),
+    adjust: Setup.fInverseSexiSetup,
+    trigger: Setup.fiveMoveTrigger,
+    json: 'frSlot3_leftySplit',
   ),
 
   /// 2-2 CYCLES
@@ -246,9 +294,9 @@ enum RevengeCase {
     required this.json,
   });
 
-  final Setup trigger;
-  final Setup adjust;
-  final Setup setup;
+  final SetupMixin trigger;
+  final SetupMixin adjust;
+  final SetupMixin setup;
   final String json;
 
   static RevengeCase? fromJson(String? json) {
@@ -275,6 +323,16 @@ enum RevengeCase {
         threeCycleFrontGood,
         threeCycleFrontBad,
         threeCycleFlippedUPerm,
+      ];
+
+  static List<RevengeCase> get frSlot3cycles => [
+        frSlot3_rightySplit,
+        frSlot3_leftyLine,
+        frSlot3_smallBlockLeft,
+        frSlot3_rightyFlipousUp,
+        frSlot3_bigBlockRight,
+        frSlot3_leftyFlipousUp,
+        frSlot3_leftySplit
       ];
 
   static List<RevengeCase> get twoTwoCycleCases => [

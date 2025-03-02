@@ -14,8 +14,8 @@ class SettingsSection extends StatelessWidget {
     return GetBuilder<SettingsController>(
       init: SettingsController(),
       builder: (controller) {
-        final isTablet = context.isLargeTablet;
-        if (!isTablet) return const SizedBox.shrink();
+        final isNotMobile = !context.isPhone;
+        if (!isNotMobile) return const SizedBox.shrink();
 
         if (controller.lastTime?.scramble?.situation case final situation?) {
           return Container(
@@ -40,8 +40,13 @@ class SettingsSection extends StatelessWidget {
                   ),
                   if (controller.showIMessedUpButton)
                     OutlinedButton(
-                      child: Text('Repeat this case'),
                       onPressed: controller.onRepeatCasePressed,
+                      child: const Text('Repeat this case'),
+                    ),
+                  if (controller.showRemoveThisCase)
+                    OutlinedButton(
+                      onPressed: controller.onRemoveCasePressed,
+                      child: const Text('Remove this case'),
                     ),
                 ],
               ),
@@ -64,6 +69,10 @@ class SettingsController extends GetxController {
 
   bool get showIMessedUpButton {
     return ScrambleController.to.config.repeatEachCaseOnce && !ScrambleController.to.config.casesSelected.contains(lastTime?.scramble?.situation);
+  }
+
+  bool get showRemoveThisCase {
+    return !ScrambleController.to.config.repeatEachCaseOnce && ScrambleController.to.config.casesSelected.contains(lastTime?.scramble?.situation);
   }
 
   void onAddTime(SessionTime time) {
@@ -92,6 +101,12 @@ class SettingsController extends GetxController {
 
   void onRepeatCasePressed() {
     ScrambleController.to.repeatCase(lastTime?.scramble?.situation).then((_) {
+      update();
+    });
+  }
+
+  void onRemoveCasePressed() {
+    ScrambleController.to.removeCase(lastTime?.scramble?.situation).then((_) {
       update();
     });
   }

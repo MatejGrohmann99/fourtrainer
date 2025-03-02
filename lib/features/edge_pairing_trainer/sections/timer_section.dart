@@ -111,6 +111,12 @@ class TimerController extends GetxController {
 
   Duration lastTime = Duration.zero;
 
+  requestFocus() {
+    if (!focusNode.hasFocus && focusNode.canRequestFocus) {
+      focusNode.requestFocus();
+    }
+  }
+
   Timer? timer;
 
   @override

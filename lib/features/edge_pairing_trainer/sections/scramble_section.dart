@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fourtrainer/features/edge_pairing_trainer/domain/session_config.dart';
 import 'package:fourtrainer/features/edge_pairing_trainer/domain/session_time.dart';
+import 'package:fourtrainer/features/edge_pairing_trainer/sections/timer_section.dart';
 import 'package:get/get.dart';
 import 'package:revenge_cube/revenge_cube.dart';
 
@@ -16,7 +17,7 @@ class ScrambleSection extends StatelessWidget {
     return GetBuilder<ScrambleController>(
       init: ScrambleController(),
       builder: (controller) {
-        final isTablet = context.isTablet;
+        final isTablet = context.isSmallTablet;
         return AnimatedSize(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
@@ -44,7 +45,7 @@ class ScrambleSection extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 8.0, right: 8),
                                     child: Text(
-                                      controller.scramble?.scramble ?? 'Select something to 🚂 on',
+                                      controller.displayScramble ?? 'Select something to 🚂 on',
                                       style: isTablet
                                           ? Theme.of(context).textTheme.displaySmall
                                           : Theme.of(context).textTheme.labelLarge,
@@ -97,6 +98,15 @@ class ScrambleController extends GetxController {
   final RevengeScrambler _scrambler = RevengeScrambler();
 
   final configStorageKey = 'scrambleControllerData';
+
+  String? get displayScramble {
+    if (config.showFiveMoveTriggerAsBomb) {
+      final fiveMoveTriggerAlgorithm = "r U R U' Rw'";
+      return scramble?.scramble?.replaceAll(fiveMoveTriggerAlgorithm, '💣');
+    } else {
+      return scramble?.scramble;
+    }
+  }
 
   String get caseSelectionMessage {
     if (config.casesSelected.isEmpty) {
@@ -187,12 +197,20 @@ class ScrambleController extends GetxController {
       randomizeAuf: config.randomizeAuf,
     );
 
+    TimerController.to.requestFocus();
+
     update();
   }
 
   Future<void> repeatCase(RevengeCase? situation) async {
     if (situation == null) return;
     config = config.addCases([situation]);
+    updateScrambleConfig(config);
+  }
+
+  Future<void> removeCase(RevengeCase? situation) async {
+    if (situation == null) return;
+    config = config.removeCases([situation]);
     updateScrambleConfig(config);
   }
 }

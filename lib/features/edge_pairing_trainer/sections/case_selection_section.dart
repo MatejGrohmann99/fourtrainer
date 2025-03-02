@@ -16,11 +16,11 @@ class CaseSelection extends StatelessWidget {
     return GetBuilder<CaseController>(
       init: CaseController(),
       builder: (controller) {
-        final isTablet = context.isTablet;
+        final isTablet = context.isSmallTablet;
         return Container(
           padding: isTablet ? const EdgeInsets.all(24) : const EdgeInsets.all(8),
           width: double.infinity,
-          height: isTablet ? 450 : 350,
+          height: isTablet ? 520 : 420,
           child: Card(
             child: Column(
               children: [
@@ -77,11 +77,16 @@ class CaseSelection extends StatelessWidget {
                             ),
                             CaseTile(
                               index: 2,
+                              link: controller.topLayerThreeCyclesLayerLink,
+                              cases: RevengeCase.frSlot3cycles,
+                            ),
+                            CaseTile(
+                              index: 3,
                               link: controller.twoTwoCyclesLayerLink,
                               cases: RevengeCase.twoTwoCycleCases,
                             ),
                             CaseTile(
-                              index: 3,
+                              index: 4,
                               link: controller.fourCyclesLayerLink,
                               cases: RevengeCase.topLayer4cycles,
                             ),
@@ -116,6 +121,18 @@ class CaseSelection extends StatelessWidget {
                   },
                 ),
                 ListTile(
+                  title: const Text('Show five move trigger as 💣'),
+                  leading: Checkbox(
+                    value: controller.shouldShowFiveMoveTriggerAsBomb,
+                    onChanged: (_) {
+                      controller.showFiveMoveTriggerAsBomb();
+                    },
+                  ),
+                  onTap: () {
+                    controller.showFiveMoveTriggerAsBomb();
+                  },
+                ),
+                ListTile(
                   trailing: Text(
                     'Selected cases: ${controller.config.casesSelected.length}',
                     style: Theme.of(context).textTheme.labelLarge,
@@ -141,7 +158,7 @@ class CaseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CaseController>(
       builder: (controller) {
-        final isTablet = context.isTablet;
+        final isTablet = context.isSmallTablet;
         final int casesSelectedCount = controller.getNumberOfSelectedCases(cases);
         return GestureDetector(
           onTap: () {
@@ -214,7 +231,7 @@ class CasesOverlayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CaseController>(
       builder: (controller) {
-        final isTablet = context.isTablet;
+        final isTablet = context.isSmallTablet;
         return Positioned(
           width: isTablet ? 170 : 120,
           child: CompositedTransformFollower(
@@ -305,6 +322,7 @@ class CaseController extends GetxController {
   LayerLink twoCyclesLayerLink = LayerLink();
   LayerLink twoTwoCyclesLayerLink = LayerLink();
   LayerLink threeCyclesLayerLink = LayerLink();
+  LayerLink topLayerThreeCyclesLayerLink = LayerLink();
   LayerLink fourCyclesLayerLink = LayerLink();
 
   LayerLink? dropdownLayerLink;
@@ -320,6 +338,8 @@ class CaseController extends GetxController {
 
   bool get repeatEachCaseOnce => config.repeatEachCaseOnce;
 
+  bool get shouldShowFiveMoveTriggerAsBomb => config.showFiveMoveTriggerAsBomb;
+
   int getNumberOfSelectedCases(List<RevengeCase> cases) =>
       cases.where((element) => config.casesSelected.contains(element)).length;
 
@@ -334,6 +354,12 @@ class CaseController extends GetxController {
 
   void toggleRepeatEachCaseOnce() {
     config = config.copyWith(repeatEachCaseOnce: !config.repeatEachCaseOnce);
+    update();
+  }
+
+
+  void showFiveMoveTriggerAsBomb() {
+    config = config.copyWith(showFiveMoveTriggerAsBomb: !config.showFiveMoveTriggerAsBomb);
     update();
   }
 
@@ -408,4 +434,5 @@ class CaseController extends GetxController {
     config = config.addCases([caseUsed]);
     update();
   }
+
 }
