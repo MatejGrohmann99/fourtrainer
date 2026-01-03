@@ -13,8 +13,8 @@ extension CaseImageMapper on RevengeCase {
         );
       case RevengeCase.threeCycleFlippedJPerm:
         return RevengeCaseImageReference(
-          ub: (S.o, S.g, S.y, S.y),
-          uf: (S.r, S.g, S.y, S.y),
+          ub: (S.y, S.g, S.o, S.y),
+          uf: (S.y, S.g, S.r, S.y),
           ur: (S.o, S.r, S.y, S.y),
         );
       case RevengeCase.threeCycleUperm:
@@ -27,7 +27,7 @@ extension CaseImageMapper on RevengeCase {
       case RevengeCase.threeCycleBackBad:
         return RevengeCaseImageReference(
           ub: (S.r, S.g, S.y, S.o),
-          uf: (S.o, S.g, S.g, S.r),
+          uf: (S.o, S.r, S.g, S.g),
           ur: (S.g, S.r, S.r, S.y),
         );
       case RevengeCase.threeCycleJperm:
@@ -44,7 +44,7 @@ extension CaseImageMapper on RevengeCase {
         );
       case RevengeCase.threeCycleFrontBad:
         return RevengeCaseImageReference(
-          ub: (S.b, S.b, S.y, S.o),
+          ub: (S.b, S.g, S.y, S.o),
           uf: (S.y, S.y, S.r, S.b),
           ur: (S.y, S.o, S.r, S.g),
         );
@@ -180,12 +180,12 @@ extension CaseImageMapper on RevengeCase {
       case RevengeCase.twoCycleOppositeFlipped:
         return RevengeCaseImageReference(
           uf: (S.g, S.b, S.y, S.r),
-          ur: (S.g, S.b, S.y, S.r),
+          ub: ( S.r,S.y,  S.b,S.g),
         );
       case RevengeCase.twoCycleOppositeOriented:
         return RevengeCaseImageReference(
           uf: (S.y, S.g, S.b, S.y),
-          ur: (S.y, S.b, S.g, S.y),
+          ub: ( S.y,S.g, S.b,S.y ),
         );
       case RevengeCase.twoCyclesFLSlotFlipped:
         return RevengeCaseImageReference(

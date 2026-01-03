@@ -69,8 +69,61 @@ class _GridPainter extends CustomPainter {
 
 final _mapper = RevengeCaseImageParser();
 
+class OverrideZmrd {
+  const OverrideZmrd({
+    this.ufl = false,
+    this.ufr = false,
+    this.urb = false,
+    this.urf = false,
+    this.ubl = false,
+    this.ubr = false,
+    this.ulb = false,
+    this.ulf = false,
+  });
+
+  factory OverrideZmrd.indexujo(int i) {
+    final bool ufl = i == 0;
+    final bool ufr = i == 1;
+    final bool urb = i == 2;
+    final bool urf = i == 3;
+    final bool ubl = i == 4;
+    final bool ubr = i == 5;
+    final bool ulb = i == 6;
+    final bool ulf = i == 7;
+
+    return OverrideZmrd(
+      ufl: ufl,
+      ufr: ufr,
+      urb: urb,
+      urf: urf,
+      ubl: ubl,
+      ubr: ubr,
+      ulb: ulb,
+      ulf: ulf,
+    );
+  }
+
+  final bool ufl;
+  final bool ufr;
+  final bool urb;
+  final bool urf;
+  final bool ubl;
+  final bool ubr;
+  final bool ulb;
+  final bool ulf;
+}
+
+const overrideEdgeColor = Colors.deepPurple;
+
 class RevengeCubeWidget extends StatelessWidget {
-  const RevengeCubeWidget({this.width = 150, this.height = 150, super.key, this.colors, this.gridColorsOverride});
+  const RevengeCubeWidget({
+    this.width = 150,
+    this.height = 150,
+    super.key,
+    this.colors,
+    this.gridColorsOverride,
+    this.override,
+  });
 
   final double width;
 
@@ -80,7 +133,8 @@ class RevengeCubeWidget extends StatelessWidget {
 
   final List<List<Sticker?>>? gridColorsOverride;
 
-  @override
+  final OverrideZmrd? override;
+
   Widget build(BuildContext context) {
     final gridColoursDefault = [
       [Colors.transparent, Colors.grey, Colors.grey, Colors.grey, Colors.grey, Colors.transparent],
@@ -105,6 +159,49 @@ class RevengeCubeWidget extends StatelessWidget {
         gridColoursDefault[key.$1][key.$2] = _getColor(color);
       },
     );
+
+    if (override case final over?) {
+      if (over.ufr) {
+        gridColoursDefault[5][3]= overrideEdgeColor;
+        gridColoursDefault[4][3]= overrideEdgeColor;
+      }
+
+      if (over.ufl) {
+        gridColoursDefault[5][2]= overrideEdgeColor;
+        gridColoursDefault[4][2]= overrideEdgeColor;
+      }
+
+      if (over.ubl) {
+        gridColoursDefault[0][2]= overrideEdgeColor;
+        gridColoursDefault[1][2]= overrideEdgeColor;
+      }
+
+      if (over.ubr) {
+        gridColoursDefault[0][3]= overrideEdgeColor;
+        gridColoursDefault[1][3]= overrideEdgeColor;
+      }
+
+      if (over.urb) {
+        gridColoursDefault[2][4]= overrideEdgeColor;
+        gridColoursDefault[2][5]= overrideEdgeColor;
+      }
+
+      if (over.urf) {
+        gridColoursDefault[3][4]= overrideEdgeColor;
+        gridColoursDefault[3][5]= overrideEdgeColor;
+      }
+
+      if (over.ulf) {
+        gridColoursDefault[3][0]= overrideEdgeColor;
+        gridColoursDefault[3][1]= overrideEdgeColor;
+      }
+
+      if (over.ulb) {
+
+        gridColoursDefault[2][0]= overrideEdgeColor;
+        gridColoursDefault[2][1]= overrideEdgeColor;
+      }
+    }
 
     return Center(
       child: Padding(

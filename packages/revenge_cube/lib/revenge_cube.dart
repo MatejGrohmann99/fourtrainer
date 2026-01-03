@@ -8,5 +8,6 @@ export 'src/mappers/algorithm_mapper.dart';
 export 'src/mappers/case_image_mapper.dart';
 export 'src/mappers/case_description_mapper.dart';
 export 'src/presentation/revenge_case.dart';
+export 'src/presentation/professor_case.dart';
 export 'src/presentation/revenge_image_builder.dart';
 export 'src/revenge_scrambler.dart';

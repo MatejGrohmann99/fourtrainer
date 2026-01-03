@@ -1,3 +1,4 @@
+import 'package:cube_images/cube_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:revenge_cube/revenge_cube.dart';
@@ -133,7 +134,9 @@ class _CaseFinderPageState extends State<ImageGenView> {
                       ],
                     );
                   }(),
-              ])
+              ]),
+              SizedBox(height: 50,),
+              SkewbWidget(),
             ],
           ),
         ),

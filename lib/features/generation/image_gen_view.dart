@@ -55,11 +55,12 @@ class _ImageGenViewState extends State<ImageGenView> {
             child: SizedBox(
               width: size,
               height: size,
-              child: RevengeImageBuilder(
-                size: size / 0.5,
-                moves: algorithmParsed,
-                overrideSideColors: isOll,
-                inverse: true,
+              child: ColoredBox(
+                color: Colors.black,
+                child: ProfessorCubeWidget(
+                  width: size / 0.5,
+                  height: size / 0.5,
+                ),
               ),
             ),
           ),

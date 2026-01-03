@@ -7,6 +7,8 @@ import '../features/edge_pairing_trainer/edge_pairing_trainer_page.dart';
 import '../features/generation/image_gen_view.dart';
 import '../features/generation/oll_image_helper_page.dart';
 import '../features/poll_discover/poll_discover_page.dart';
+import '../features/sheet/case_switcher.dart';
+import '../features/sheet/images.dart';
 
 getAppRoutes() => {
       '/': (context) => const EdgePairingTrainerPage(),
@@ -17,4 +19,6 @@ getAppRoutes() => {
       '/poll': (context) => const POllDiscoverPage(),
       '/poll/ruf': (context) => const POllRUFDiscoverPage(),
       '/fourcycles': (context) => const FourCycleSheet(),
+      '/goodluck': (context) => const ImagesSheet(),
+      '/switchoun': (context) => const CaseSwitcher(),
     };

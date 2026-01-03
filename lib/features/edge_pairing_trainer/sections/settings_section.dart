@@ -35,6 +35,8 @@ class SettingsSection extends StatelessWidget {
                   RevengeCubeWidget(
                     colors: situation.ui,
                   ),
+                  const SizedBox(height: 16),
+                  Text(situation.alg),
                   const SizedBox(
                     height: 16,
                   ),

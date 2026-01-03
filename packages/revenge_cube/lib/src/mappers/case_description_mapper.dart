@@ -77,9 +77,9 @@ extension CaseDescriptionMapper on RevengeCase {
       case RevengeCase.threeCycleFlippedUPerm:
         return 'Flipped U perm';
       case RevengeCase.fourCycleTwoSplitPairsSymmetricRight:
-        return 'Two Split Pairs Symmetric Right';
-      case RevengeCase.fourCycleTwoSplitPairsSymmetricLeft:
         return 'Two Split Pairs Symmetric Left';
+      case RevengeCase.fourCycleTwoSplitPairsSymmetricLeft:
+        return 'Two Split Pairs Symmetric Right';
       case RevengeCase.fourCycleSymmetricSmallPairs:
         return 'Symmetric Small Pairs';
       case RevengeCase.fourCycleSymmetricBigPairs:
@@ -89,9 +89,9 @@ extension CaseDescriptionMapper on RevengeCase {
       case RevengeCase.fourCycleDiagonalSmallPairs:
         return 'Diagonal Small Pairs';
       case RevengeCase.fourCycleDiagonalSmallLong:
-        return 'Diagonal Small Long';
+        return 'Butterfly';
       case RevengeCase.fourCycleDiagonalSmallLongFlipped:
-        return 'Diagonal Small Long Flipped';
+        return 'Flipped Butterfly';
       case RevengeCase.fourCycleSmallLeftLine:
         return 'Small Left Line';
       case RevengeCase.fourCycleSmallRightLine:
