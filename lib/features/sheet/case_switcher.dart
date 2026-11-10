@@ -91,14 +91,14 @@ class _CaseSwitcherState extends State<CaseSwitcher> {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Case Switcher'),
+            title: const Text('L5E Image catalog'),
           ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${currentCase.caseName} (index pyco $actualCaseIndex)',
+                  '${currentCase.caseName} (index $actualCaseIndex)',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 32),
